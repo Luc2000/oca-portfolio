@@ -12,7 +12,7 @@ const teamMembers = [
     name: "Lucas Annunziato",
     role: "Fundador & Desenvolvedor Full Stack",
     bio: "Desenvolvedor com mais de 7 anos de experiência, especializado em JavaScript e ecossistemas React. Fundador do Revo, uma plataforma completa de busca de eventos e venda de ingressos, e todo seu ecossistema de produtos.",
-    image: "/images/team/lucas.png",
+    image: "/images/team/annunziato.png",
   },
   {
     id: 2,
