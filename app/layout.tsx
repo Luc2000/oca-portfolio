@@ -7,11 +7,13 @@ import Footer from "./components/Footer";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -78,7 +80,8 @@ export const metadata: Metadata = {
   viewport: {
     width: "device-width",
     initialScale: 1,
-    maximumScale: 1,
+    maximumScale: 5,
+    userScalable: true,
   },
   formatDetection: {
     telephone: true,
@@ -107,13 +110,15 @@ export default function RootLayout({
     <html
       lang="pt-BR"
       className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
+      style={{ colorScheme: "dark" }}
     >
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="theme-color" content="#171717" />
+        <meta name="color-scheme" content="dark" />
       </head>
-      <body className="bg-gray-900">
+      <body className="bg-gray-900 text-gray-100">
         <Navbar />
         <main className="min-h-screen">{children}</main>
         <Footer />

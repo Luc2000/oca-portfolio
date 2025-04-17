@@ -2,99 +2,106 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { FiArrowRight } from "react-icons/fi";
 
 const Hero = () => {
   return (
-    <section className="relative h-screen flex items-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-black overflow-hidden">
-      {/* Background Elements/Decoração */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute right-0 bottom-0 w-1/3 h-1/3 bg-gradient-to-t from-blue-500/10 to-purple-500/5 rounded-tl-full blur-3xl"></div>
-        <div className="absolute left-0 top-0 w-1/4 h-1/4 bg-gradient-to-b from-blue-500/10 to-transparent rounded-br-full blur-3xl"></div>
-
-        {/* Círculos de Decoração */}
-        <motion.div
-          className="absolute top-1/4 right-1/4 w-64 h-64 rounded-full border border-blue-500/20 dark:border-blue-500/10"
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-        />
-        <motion.div
-          className="absolute bottom-1/3 left-1/3 w-96 h-96 rounded-full border border-purple-500/20 dark:border-purple-500/10"
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
-        />
+    <section className="relative min-h-[90vh] flex items-center bg-gray-900 overflow-hidden">
+      {/* Background Elements - Simplificados para melhor performance */}
+      <div
+        className="absolute inset-0 overflow-hidden pointer-events-none"
+        aria-hidden="true"
+      >
+        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-blue-600/20 blur-2xl"></div>
+        <div className="absolute top-20 -left-40 w-80 h-80 rounded-full bg-purple-600/20 blur-2xl"></div>
+        <div className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-cyan-600/20 blur-2xl"></div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-col space-y-6"
+            transition={{ duration: 0.4 }}
+            className="text-center lg:text-left"
           >
             <motion.h1
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight"
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-white"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
             >
-              Transformando{" "}
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Transformamos{" "}
+              <span className="bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
                 ideias
               </span>{" "}
-              em startups de sucesso
+              em produtos digitais
             </motion.h1>
 
             <motion.p
-              className="text-xl text-gray-600 dark:text-gray-300 max-w-lg"
+              className="text-xl text-gray-300 mb-8 max-w-xl mx-auto lg:mx-0"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
             >
-              Mais que uma software house, somos parceiros na criação do seu MVP
-              e no crescimento do seu negócio digital.
+              Desenvolvimento de aplicações web e mobile com foco em
+              performance, usabilidade e resultados.
             </motion.p>
 
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 pt-4"
+              className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              transition={{ duration: 0.4, delay: 0.3 }}
             >
-              <Link href="/contato">
-                <button className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-md shadow-lg hover:shadow-xl transition-all text-lg font-medium">
-                  Iniciar Projeto
-                </button>
+              <Link
+                href="/projetos"
+                className="px-8 py-3 rounded-md bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium hover:shadow-lg hover:opacity-90 transition-all inline-flex items-center justify-center"
+              >
+                Ver Projetos
+                <FiArrowRight className="ml-2" />
               </Link>
-              <Link href="/projetos">
-                <button className="px-8 py-3 bg-white dark:bg-gray-800 text-gray-700 dark:text-white rounded-md shadow-md hover:shadow-lg transition-all text-lg font-medium border border-gray-200 dark:border-gray-700">
-                  Ver Portfolio
-                </button>
+
+              <Link
+                href="/contato"
+                className="px-8 py-3 rounded-md bg-gray-800 text-white border border-gray-700 hover:bg-gray-750 transition-all inline-flex items-center justify-center"
+              >
+                Contato
               </Link>
             </motion.div>
           </motion.div>
 
+          {/* Visual element - Exibido apenas no desktop */}
           <motion.div
+            className="hidden lg:block"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="hidden lg:block"
+            transition={{ duration: 0.5, delay: 0.2 }}
           >
-            {/* Elemento visual representativo */}
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl blur-xl transform translate-x-4 translate-y-4"></div>
-              <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 border border-gray-100 dark:border-gray-700">
-                <div className="w-full h-80 rounded-xl bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-900 flex items-center justify-center">
-                  <span className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                    OCA
-                  </span>
+            <div className="w-full h-96 bg-gradient-to-br from-blue-600/10 to-purple-600/10 rounded-2xl border border-gray-700/50 backdrop-blur-sm p-4 shadow-xl">
+              <div className="w-full h-full rounded-xl bg-gray-800/70 flex items-center justify-center relative overflow-hidden">
+                <div className="absolute top-0 left-0 right-0 h-8 bg-gray-900/50 flex items-center px-3">
+                  <div className="flex space-x-2">
+                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                  </div>
                 </div>
-                <div className="mt-6 flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-500"></div>
+
+                <div className="text-center px-6">
+                  <div className="text-sm font-mono text-blue-400 mb-3">
+                    const OCA = () =&gt; {"{"}
+                  </div>
+                  <div className="text-sm font-mono text-gray-300 ml-4 mb-2">
+                    return (
+                  </div>
+                  <div className="text-sm font-mono text-purple-400 ml-8 mb-2">
+                    &lt;TransformandoIdeias /&gt;
+                  </div>
+                  <div className="text-sm font-mono text-gray-300 ml-4 mb-3">
+                    );
+                  </div>
+                  <div className="text-sm font-mono text-blue-400">{"}"}</div>
                 </div>
               </div>
             </div>

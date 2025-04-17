@@ -22,7 +22,7 @@ const projects = [
       "Pagar.me",
       "Amplitude",
     ],
-    link: "/projetos/revo",
+    link: "/projetos/revo-app",
   },
   {
     id: "vipou",

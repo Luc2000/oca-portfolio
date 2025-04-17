@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -18,18 +18,15 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const currentPath = usePathname();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+  // Otimizando o handler de scroll com useCallback para melhorar desempenho
+  const handleScroll = useCallback(() => {
+    setScrolled(window.scrollY > 20);
   }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -41,23 +38,27 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed w-full z-50 transition-all duration-300 ${
+      className={`fixed w-full z-50 transition-all duration-200 ${
         scrolled
-          ? "py-3 bg-gray-900/90 backdrop-blur-lg shadow-md"
-          : "py-5 bg-transparent"
+          ? "py-2 bg-gray-900/95 backdrop-blur-md shadow-md"
+          : "py-3 bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
+          <Link
+            href="/"
+            className="flex items-center"
+            onClick={closeMobileMenu}
+          >
             <Image
               src="/images/full-logo.svg"
               alt="OCA Software House"
-              width={200}
-              height={100}
+              width={180}
+              height={90}
               priority
-              className="h-14 w-auto"
+              className="h-12 w-auto"
             />
           </Link>
 
@@ -68,7 +69,7 @@ const Navbar = () => {
                 <Link
                   key={item.path}
                   href={item.path}
-                  className={`text-white hover:text-blue-400 transition-colors flex items-center h-16 ${
+                  className={`text-white hover:text-blue-400 transition-colors flex items-center h-16 px-2 ${
                     currentPath === item.path ? "font-medium text-blue-400" : ""
                   }`}
                 >
@@ -83,7 +84,7 @@ const Navbar = () => {
                   "_blank"
                 )
               }
-              className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-md hover:opacity-90 transition-opacity cursor-pointer"
+              className="px-5 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-md hover:shadow-lg transition-all cursor-pointer"
             >
               Contratar
             </button>
@@ -94,48 +95,52 @@ const Navbar = () => {
             <button
               onClick={toggleMobileMenu}
               aria-label="Toggle Menu"
-              className="p-2 rounded-md hover:bg-gray-800 transition-colors"
+              className="p-3 rounded-md hover:bg-gray-800 transition-colors touch-manipulation"
             >
               {mobileMenuOpen ? (
-                <FiX className="text-white" />
+                <FiX className="text-white text-2xl" />
               ) : (
-                <FiMenu className="text-white" />
+                <FiMenu className="text-white text-2xl" />
               )}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Reduzindo atraso na animação */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ${
-          mobileMenuOpen ? "max-h-96" : "max-h-0"
+        className={`md:hidden fixed top-[60px] left-0 right-0 transition-all duration-200 ease-in-out ${
+          mobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
+        style={{ height: mobileMenuOpen ? "auto" : "0" }}
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 bg-gray-900 shadow-lg">
-          <ul className="space-y-4">
+        <div className="px-4 py-5 bg-gray-900/95 backdrop-blur-md shadow-lg border-t border-gray-800">
+          <ul className="space-y-1">
             {navItems.map((item) => (
               <li key={item.path}>
                 <Link
                   href={item.path}
                   onClick={closeMobileMenu}
-                  className={`block py-2 text-white hover:text-blue-400 transition-colors ${
-                    currentPath === item.path ? "font-medium text-blue-400" : ""
+                  className={`block py-3 px-4 text-white hover:bg-gray-800 rounded-md transition-colors ${
+                    currentPath === item.path
+                      ? "font-medium text-blue-400 bg-gray-800/50"
+                      : ""
                   }`}
                 >
                   {item.name}
                 </Link>
               </li>
             ))}
-            <li>
+            <li className="pt-3">
               <button
-                onClick={() =>
+                onClick={() => {
                   window.open(
                     "https://wa.me/5511949629527?text=Olá%20Lucas,%20vim%20pelo%20site%20da%20OCA%20e%20gostaria%20de%20discutir%20um%20projeto.",
                     "_blank"
-                  )
-                }
-                className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-md hover:opacity-90 transition-opacity w-full cursor-pointer"
+                  );
+                  closeMobileMenu();
+                }}
+                className="px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-md hover:shadow-lg transition-all w-full cursor-pointer font-medium"
               >
                 Contratar
               </button>
