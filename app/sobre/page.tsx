@@ -12,21 +12,21 @@ const teamMembers = [
     name: "Lucas Annunziato",
     role: "Fundador & Desenvolvedor Full Stack",
     bio: "Desenvolvedor com mais de 7 anos de experiência, especializado em JavaScript e ecossistemas React. Fundador do Revo, uma plataforma completa de busca de eventos e venda de ingressos, e todo seu ecossistema de produtos.",
-    image: "/images/team/lucas.jpg",
+    image: "/images/team/lucas.PNG",
   },
   {
     id: 2,
     name: "Gabriela Dionelli",
     role: "Designer UI/UX & Marketing",
     bio: "Especialista em design de interfaces com foco em experiência do usuário e estratégias de marketing digital. Com background em psicologia e design thinking, traz uma abordagem centrada no usuário para criar produtos intuitivos e visualmente impactantes.",
-    image: "/images/team/gabriela.png",
+    image: "/images/team/gabriela.PNG",
   },
   {
     id: 3,
     name: "Rafael Oliveira",
     role: "Desenvolvedor Full Stack",
     bio: "Desenvolvedor com 5 anos de experiência em tecnologias front-end e back-end. Especialista em React, Node.js e arquiteturas em nuvem. Possui grande habilidade em resolver problemas complexos e otimizar aplicações para alta performance.",
-    image: "/images/team/rafael.png",
+    image: "/images/team/rafael.PNG",
   },
 ];
 

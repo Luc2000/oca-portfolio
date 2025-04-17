@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { FiArrowLeft, FiCode, FiLayers, FiCheck } from "react-icons/fi";
 
 // Definição de tipo para o projeto
@@ -296,11 +297,16 @@ const ProjectPage = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="rounded-xl overflow-hidden shadow-md bg-white dark:bg-gray-800"
             >
-              <img
-                src={project?.images[0] || ""}
-                alt={project?.title || ""}
-                className="w-full h-auto object-cover"
-              />
+              <div className="relative w-full h-[400px]">
+                <Image
+                  src={project?.images[0] || ""}
+                  alt={project?.title || ""}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  priority
+                />
+              </div>
               {project?.id === "revo-app" && (
                 <div className="p-4 bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-center">
                   <p className="font-semibold">

@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { FiSend, FiPhone, FiLinkedin } from "react-icons/fi";
 import { motion } from "framer-motion";
-import { FiMail, FiSend, FiPhone, FiLinkedin } from "react-icons/fi";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
