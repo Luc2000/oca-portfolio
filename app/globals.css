@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Garantir que o clip-path funcione bem nos gradientes */
+.bg-clip-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Personalização básica */
 :root {
   --background: #ffffff;
   --foreground: #171717;

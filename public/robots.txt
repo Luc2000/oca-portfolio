@@ -1,0 +1,6 @@
+# Permitir todos os rastreadores
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.ocasoftwarehouse.com.br/sitemap.xml 
