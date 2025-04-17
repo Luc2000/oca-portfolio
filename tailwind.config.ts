@@ -46,18 +46,6 @@ const config: Config = {
     },
   },
   plugins: [],
-  // Reduzir o tamanho do CSS final removendo variantes não utilizadas
-  safelist: [
-    // Mantenha apenas as classes que realmente precisamos na lista de segurança
-    {
-      pattern: /^bg-/,
-      variants: ["hover", "dark"],
-    },
-    {
-      pattern: /^text-/,
-      variants: ["hover", "dark"],
-    },
-  ],
   future: {
     hoverOnlyWhenSupported: true, // Melhorar desempenho em dispositivos móveis
   },
