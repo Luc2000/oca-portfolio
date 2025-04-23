@@ -69,7 +69,8 @@ const WhyChooseUs = () => {
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400">
             Mais que uma software house, somos um parceiro que entende o desafio
-            de criar uma startup do zero.
+            de criar uma startup do zero. Entendemos sua ansiedade de
+            empreendedor!
           </p>
         </motion.div>
 

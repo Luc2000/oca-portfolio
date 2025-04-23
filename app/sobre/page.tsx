@@ -17,7 +17,7 @@ const teamMembers = [
   {
     id: 2,
     name: "Gabriela Dionelli",
-    role: "Designer UI/UX & Marketing",
+    role: "Desenvolvedora Full Stack",
     bio: "Especialista em design de interfaces com foco em experiência do usuário e estratégias de marketing digital. Com background em psicologia e design thinking, traz uma abordagem centrada no usuário para criar produtos intuitivos e visualmente impactantes.",
     image: "/images/team/gabriela.png",
   },
