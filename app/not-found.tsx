@@ -47,68 +47,6 @@ export default function NotFound() {
     return ((position - center) / (center || 1)) * intensity;
   };
 
-  // Variantes para o número 404
-  const number404Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  // Variantes para o círculo decorativo
-  const circleVariants = {
-    hidden: { scale: 0, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-        delay: 0.2,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  // Variantes para o texto
-  const textVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        delay: 0.4,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  // Variantes para o botão
-  const buttonVariants = {
-    hidden: { opacity: 0, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.5,
-        delay: 0.7,
-        ease: "easeOut",
-      },
-    },
-    hover: {
-      scale: 1.05,
-      boxShadow: "0 10px 25px -5px rgba(59, 130, 246, 0.5)",
-      transition: {
-        duration: 0.3,
-      },
-    },
-  };
-
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-white dark:bg-gray-900 overflow-hidden relative">
       {/* Círculos decorativos no fundo */}
@@ -135,7 +73,6 @@ export default function NotFound() {
 
       <motion.div
         className="z-10 mb-8 flex items-center justify-center"
-        variants={number404Variants}
         initial="hidden"
         animate="visible"
       >
@@ -144,7 +81,6 @@ export default function NotFound() {
         </span>
         <motion.div
           className="relative w-36 h-36 mx-2"
-          variants={circleVariants}
           initial="hidden"
           animate="visible"
         >
@@ -183,7 +119,6 @@ export default function NotFound() {
 
       <motion.h2
         className="text-2xl font-bold text-gray-700 dark:text-gray-300 mb-6 text-center"
-        variants={textVariants}
         initial="hidden"
         animate="visible"
       >
@@ -192,7 +127,6 @@ export default function NotFound() {
 
       <motion.p
         className="text-gray-600 dark:text-gray-400 mb-8 text-center max-w-md"
-        variants={textVariants}
         initial="hidden"
         animate="visible"
       >
@@ -201,7 +135,6 @@ export default function NotFound() {
       </motion.p>
 
       <motion.div
-        variants={buttonVariants}
         initial="hidden"
         animate="visible"
         whileHover="hover"
