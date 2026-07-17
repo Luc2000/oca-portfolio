@@ -14,7 +14,7 @@ const FeaturedProjects = () => {
         <SectionHeader
           label="Projetos em produção"
           title="Produtos reais, com usuários e pagamentos reais"
-          lede="Uma amostra do que já saiu da prancheta: o ecossistema Revo, construído do zero pela OCA, e projetos para clientes."
+          lede="Uma amostra do que já saiu da prancheta: o ecossistema Revo, construído do zero pela OCA e usado por mais de 40 mil pessoas, e produtos para clientes."
         />
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">

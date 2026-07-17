@@ -7,13 +7,16 @@ import OcaBlueprint from "./OcaBlueprint";
 import { whatsappUrl, defaultWhatsappMessage } from "../data/site";
 
 const materials = [
+  "IA & Agentes",
   "React Native",
   "Next.js",
   "TypeScript",
+  "OpenAI",
+  "Claude",
   "Supabase",
   "Node.js",
+  "Automações",
   "Expo",
-  "Tailwind CSS",
   "PostgreSQL",
   "Python",
   "Pagar.me",
@@ -54,9 +57,9 @@ const Hero = () => {
             variants={item}
             className="mt-7 max-w-xl text-lg leading-relaxed text-palha sm:text-xl"
           >
-            MVPs, aplicativos e sistemas web de ponta a ponta, feitos por quem
-            já construiu e lançou os próprios produtos. Você traz a ideia, a
-            OCA levanta a estrutura.
+            Aplicativos, sistemas e produtos com IA, feitos por quem já lançou
+            os próprios: mais de 40 mil pessoas usam o que a gente construiu.
+            Você traz a ideia, a OCA levanta a estrutura.
           </motion.p>
 
           <motion.div
@@ -79,8 +82,8 @@ const Hero = () => {
           </motion.div>
 
           <motion.p variants={item} className="annotation mt-12">
-            7+ anos de estrada · Ecossistema próprio em produção · Checkout com
-            90% de conversão
+            +40 mil usuários nos nossos produtos · Checkout com 90% de
+            conversão · IA no processo e no produto
           </motion.p>
         </motion.div>
 

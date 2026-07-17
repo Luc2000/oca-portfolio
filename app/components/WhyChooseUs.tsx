@@ -8,6 +8,11 @@ const reasons = [
       "A OCA criou e opera o ecossistema Revo: app, dashboard e menu digital com pagamentos reais em produção. Sabemos o que é lançar, errar, corrigir e escalar com o próprio dinheiro em jogo.",
   },
   {
+    title: "Velocidade de IA, qualidade de sênior",
+    description:
+      "Construímos com IA no processo inteiro e revisão sênior em cada linha: entregamos em semanas o que times tradicionais levam meses, sem virar a dívida técnica de amanhã.",
+  },
+  {
     title: "Foco em validar, não em faturar horas",
     description:
       "O escopo do MVP é desenhado para responder à pergunta que importa: alguém paga por isso? Você lança em semanas e decide o próximo passo com dados, não com achismo.",
@@ -16,11 +21,6 @@ const reasons = [
     title: "Parceria além do código",
     description:
       "Para projetos promissores, a conversa pode ir além do desenvolvimento: participação, estratégia de produto e a experiência de quem já empreendeu do outro lado da mesa.",
-  },
-  {
-    title: "Qualidade que não trava o crescimento",
-    description:
-      "Código limpo, arquitetura pensada para escalar e stack moderna. O MVP de hoje não vira a dívida técnica de amanhã.",
   },
 ];
 

@@ -131,7 +131,9 @@ export default function AboutPage() {
                   software house. Não queremos apenas entregar código: queremos
                   ajudar empreendedores a transformarem suas ideias em startups
                   de sucesso, com desenvolvimento técnico e insights
-                  estratégicos de quem já empreendeu.
+                  estratégicos de quem já empreendeu. E construímos com IA no
+                  processo inteiro, o que nos deixa mais rápidos do que times
+                  muito maiores.
                 </p>
               </div>
             </Reveal>

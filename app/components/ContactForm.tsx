@@ -7,10 +7,11 @@ import { whatsappUrl } from "../data/site";
 
 const projectTypes = [
   { value: "website", label: "Website" },
-  { value: "app", label: "Aplicativo Móvel" },
+  { value: "app", label: "Aplicativo" },
   { value: "mvp", label: "MVP" },
+  { value: "ai", label: "Produto com IA / Automação" },
   { value: "ecommerce", label: "E-commerce" },
-  { value: "system", label: "Sistema Web" },
+  { value: "system", label: "Sistema" },
   { value: "partnership", label: "Proposta de Parceria" },
   { value: "other", label: "Outro" },
 ];

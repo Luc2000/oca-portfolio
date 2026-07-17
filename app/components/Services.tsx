@@ -3,34 +3,34 @@ import SectionHeader from "./SectionHeader";
 
 const services = [
   {
-    title: "Aplicativos mobile",
+    title: "Aplicativos",
     description:
-      "Apps para iOS e Android em React Native, da loja de aplicativos ao push notification, com a fluidez de app nativo.",
+      "Seu produto na App Store e na Google Play, com a cara e a fluidez de app grande.",
   },
   {
-    title: "Aplicações web",
+    title: "Sites e sistemas",
     description:
-      "Sites, dashboards e sistemas em Next.js: rápidos, responsivos e prontos para ranquear no Google.",
+      "Do site que vende ao sistema que roda a operação: rápidos, bonitos e prontos para ranquear no Google.",
   },
   {
-    title: "Backend e APIs",
+    title: "Produtos com IA",
     description:
-      "APIs escaláveis, integrações com gateways de pagamento e infraestrutura que aguenta o dia de pico.",
+      "Chatbots, agentes e automações que atendem, vendem e operam o negócio enquanto você dorme.",
   },
   {
-    title: "MVP para startups",
+    title: "MVP para validar sua ideia",
     description:
-      "O caminho mais curto entre a ideia e usuários reais: escopo enxuto, lançamento rápido, base pronta para crescer.",
+      "O caminho mais curto entre a ideia e os primeiros clientes pagando: escopo enxuto, lançamento em semanas.",
   },
   {
-    title: "Escala e performance",
+    title: "Pagamentos e integrações",
     description:
-      "Produtos que crescem com o negócio, do protótipo validado aos milhares de usuários simultâneos.",
+      "Pix, cartão, WhatsApp, nota fiscal: seu produto conversando com tudo o que o seu negócio já usa.",
   },
   {
-    title: "Manutenção contínua",
+    title: "Escala e evolução",
     description:
-      "Suporte, monitoramento e evolução constante de sistemas que já estão em produção.",
+      "Lançar é só o começo: monitoramos, corrigimos e evoluímos o produto do protótipo aos milhares de usuários.",
   },
 ];
 
@@ -41,7 +41,7 @@ const Services = () => {
         <SectionHeader
           label="O que construímos"
           title="Tudo o que um produto digital precisa para sair do papel"
-          lede="Uma equipe única cuida do produto inteiro: design, mobile, web, backend e o que vier depois do lançamento."
+          lede="Um time só cuida do produto inteiro: design, aplicativo, site, a parte técnica toda e o que vier depois do lançamento."
         />
 
         <div className="grid grid-cols-1 gap-x-12 sm:grid-cols-2 lg:grid-cols-3">
