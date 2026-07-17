@@ -15,7 +15,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
           alt={`Tela do projeto ${project.title}`}
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+          className={`object-cover ${project.thumbPosition ?? "object-top"} transition-transform duration-500 group-hover:scale-[1.03]`}
         />
       </div>
       <div className="flex flex-1 flex-col p-7">

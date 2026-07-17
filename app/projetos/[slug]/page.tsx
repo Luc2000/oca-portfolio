@@ -98,7 +98,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 alt={`Tela do projeto ${project.title}`}
                 fill
                 sizes="(max-width: 1152px) 100vw, 1152px"
-                className="object-cover object-top"
+                className={
+                  project.heroFit === "contain"
+                    ? "object-contain p-6"
+                    : "object-cover object-top"
+                }
                 priority
               />
             </div>

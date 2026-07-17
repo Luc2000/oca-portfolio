@@ -83,14 +83,13 @@ const OcaBlueprint = () => {
         transition={{ duration: reduced ? 0 : 0.6, delay: reduced ? 0 : 2.6 }}
       >
         <g stroke="var(--color-palha)" strokeWidth="1.5">
-          <line x1="100" y1="352" x2="177" y2="352" />
-          <line x1="223" y1="352" x2="300" y2="352" />
-          <line x1="100" y1="346" x2="100" y2="358" />
-          <line x1="300" y1="346" x2="300" y2="358" />
+          <line x1="100" y1="368" x2="300" y2="368" />
+          <line x1="100" y1="362" x2="100" y2="374" />
+          <line x1="300" y1="362" x2="300" y2="374" />
         </g>
         <text
           x="200"
-          y="356"
+          y="390"
           textAnchor="middle"
           fill="var(--color-palha)"
           fontFamily="var(--font-mono)"

@@ -8,7 +8,11 @@ export interface Project {
   fullDescription: string[];
   highlight?: string;
   image: string;
+  /* Tailwind object-position class for the card thumbnail crop */
+  thumbPosition?: string;
   images: string[];
+  /* "contain" for tall/framed shots that must not be cropped */
+  heroFit?: "cover" | "contain";
   tags: string[];
   features: string[];
   challenges: string[];
@@ -39,10 +43,12 @@ export const projects: Project[] = [
     ],
     highlight: "Checkout com 90% de taxa de conversão",
     image: "/images/projetos/revo/revo-app.png",
+    thumbPosition: "object-center",
     images: [
-      "/images/projetos/revo/revo-app.png",
       "/images/projetos/revo/revo-checkout.png",
+      "/images/projetos/revo/revo-app.png",
     ],
+    heroFit: "contain",
     tags: [
       "React Native",
       "Expo",
