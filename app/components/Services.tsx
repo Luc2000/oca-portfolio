@@ -1,94 +1,61 @@
-"use client";
-
-import { motion } from "framer-motion";
-import {
-  FiCode,
-  FiDatabase,
-  FiSmartphone,
-  FiLayers,
-  FiTrendingUp,
-  FiShield,
-} from "react-icons/fi";
+import Reveal from "./Reveal";
+import SectionHeader from "./SectionHeader";
 
 const services = [
   {
-    icon: <FiSmartphone className="text-blue-500 text-2xl" />,
-    title: "Desenvolvimento Mobile",
+    title: "Aplicativos mobile",
     description:
-      "Aplicativos nativos e híbridos para iOS e Android com foco em experiência do usuário.",
+      "Apps para iOS e Android em React Native, da loja de aplicativos ao push notification, com a fluidez de app nativo.",
   },
   {
-    icon: <FiCode className="text-purple-500 text-2xl" />,
-    title: "Desenvolvimento Web",
+    title: "Aplicações web",
     description:
-      "Sites e aplicações web modernas, rápidas e responsivas utilizando as mais recentes tecnologias.",
+      "Sites, dashboards e sistemas em Next.js: rápidos, responsivos e prontos para ranquear no Google.",
   },
   {
-    icon: <FiDatabase className="text-green-500 text-2xl" />,
-    title: "Arquitetura Backend",
+    title: "Backend e APIs",
     description:
-      "APIs escaláveis, microserviços e integrações com alta performance e segurança.",
+      "APIs escaláveis, integrações com gateways de pagamento e infraestrutura que aguenta o dia de pico.",
   },
   {
-    icon: <FiLayers className="text-orange-500 text-2xl" />,
-    title: "MVP para Startups",
+    title: "MVP para startups",
     description:
-      "Desenvolvimento rápido de produtos mínimos viáveis para validação de negócios.",
+      "O caminho mais curto entre a ideia e usuários reais: escopo enxuto, lançamento rápido, base pronta para crescer.",
   },
   {
-    icon: <FiTrendingUp className="text-red-500 text-2xl" />,
-    title: "Escalabilidade",
+    title: "Escala e performance",
     description:
-      "Soluções que crescem com seu negócio, desde o protótipo até milhões de usuários.",
+      "Produtos que crescem com o negócio, do protótipo validado aos milhares de usuários simultâneos.",
   },
   {
-    icon: <FiShield className="text-teal-500 text-2xl" />,
-    title: "Manutenção & Suporte",
+    title: "Manutenção contínua",
     description:
-      "Suporte contínuo, monitoramento e evolução de sistemas existentes.",
+      "Suporte, monitoramento e evolução constante de sistemas que já estão em produção.",
   },
 ];
 
 const Services = () => {
   return (
-    <section className="py-16 bg-gray-900" id="servicos">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <motion.h2
-            className="text-3xl font-bold text-white mb-4"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            Nossos Serviços
-          </motion.h2>
-          <motion.p
-            className="text-gray-300 max-w-2xl mx-auto text-lg"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.05 }}
-          >
-            Soluções completas para transformar sua ideia em realidade
-          </motion.p>
-        </div>
+    <section className="py-24" id="servicos">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          label="O que construímos"
+          title="Tudo o que um produto digital precisa para sair do papel"
+          lede="Uma equipe única cuida do produto inteiro: design, mobile, web, backend e o que vier depois do lançamento."
+        />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 gap-x-12 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => (
-            <motion.div
-              key={index}
-              className="bg-gray-800 rounded-lg p-6 h-full border border-gray-700 shadow-md hover:shadow-lg transition-shadow"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.05 }}
-            >
-              <div className="mb-4 p-3 inline-block bg-gray-700 rounded-lg">
-                {service.icon}
+            <Reveal key={service.title} delay={index * 0.06}>
+              <div className="h-full border-t border-fresta py-8">
+                <h3 className="font-display text-xl font-semibold text-areia">
+                  {service.title}
+                </h3>
+                <p className="mt-3 leading-relaxed text-palha">
+                  {service.description}
+                </p>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-3">
-                {service.title}
-              </h3>
-              <p className="text-gray-300">{service.description}</p>
-            </motion.div>
+            </Reveal>
           ))}
         </div>
       </div>

@@ -1,116 +1,53 @@
-"use client";
-
-import { motion } from "framer-motion";
-import {
-  FiClock,
-  FiThumbsUp,
-  FiUsers,
-  FiTarget,
-  FiHeadphones,
-  FiLayers,
-} from "react-icons/fi";
+import Reveal from "./Reveal";
+import SectionHeader from "./SectionHeader";
 
 const reasons = [
   {
-    icon: <FiLayers size={24} />,
-    title: "Visão Empreendedora",
+    title: "Quem constrói produto próprio, constrói melhor o seu",
     description:
-      "Nossa experiência na criação de startups nos permite oferecer insights valiosos sobre desenvolvimento de produtos e estratégias de crescimento.",
+      "A OCA criou e opera o ecossistema Revo: app, dashboard e menu digital com pagamentos reais em produção. Sabemos o que é lançar, errar, corrigir e escalar com o próprio dinheiro em jogo.",
   },
   {
-    icon: <FiUsers size={24} />,
-    title: "Parceria Real",
+    title: "Foco em validar, não em faturar horas",
     description:
-      "Não somos apenas desenvolvedores. Somos parceiros que podem investir e participar ativamente do seu projeto se houver potencial.",
+      "O escopo do MVP é desenhado para responder à pergunta que importa: alguém paga por isso? Você lança em semanas e decide o próximo passo com dados, não com achismo.",
   },
   {
-    icon: <FiTarget size={24} />,
-    title: "Foco em MVP",
+    title: "Parceria além do código",
     description:
-      "Especialistas em criar produtos mínimos viáveis que permitem validar seu conceito rapidamente com investimento reduzido.",
+      "Para projetos promissores, a conversa pode ir além do desenvolvimento: participação, estratégia de produto e a experiência de quem já empreendeu do outro lado da mesa.",
   },
   {
-    icon: <FiThumbsUp size={24} />,
-    title: "Qualidade Superior",
+    title: "Qualidade que não trava o crescimento",
     description:
-      "Código limpo, documentado e testado, seguindo as melhores práticas de desenvolvimento para garantir escalabilidade.",
-  },
-  {
-    icon: <FiClock size={24} />,
-    title: "Metodologia Ágil",
-    description:
-      "Utilizamos métodos ágeis para entregar resultados rapidamente e adaptar o projeto às necessidades do mercado em tempo real.",
-  },
-  {
-    icon: <FiHeadphones size={24} />,
-    title: "Suporte Contínuo",
-    description:
-      "Acompanhamento após o lançamento para garantir o crescimento sustentável do seu produto digital.",
+      "Código limpo, arquitetura pensada para escalar e stack moderna. O MVP de hoje não vira a dívida técnica de amanhã.",
   },
 ];
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-20 bg-white dark:bg-gray-900">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          className="text-center max-w-3xl mx-auto mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Por que{" "}
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              escolher
-            </span>{" "}
-            a OCA?
-          </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400">
-            Mais que uma software house, somos um parceiro que entende o desafio
-            de criar uma startup do zero. Entendemos sua ansiedade de
-            empreendedor!
-          </p>
-        </motion.div>
+    <section className="border-y border-fresta bg-carvao py-24">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          label="Por que a OCA"
+          title="Uma software house com cabeça de founder"
+          lede="Mais do que entregar código, ajudamos a transformar ideias em negócios que param em pé."
+        />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-x-12 gap-y-2 md:grid-cols-2">
           {reasons.map((reason, index) => (
-            <motion.div
-              key={index}
-              className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow border border-gray-100 dark:border-gray-700"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -5 }}
-            >
-              <div className="inline-block p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg text-purple-600 dark:text-purple-400 mb-4">
-                {reason.icon}
+            <Reveal key={reason.title} delay={(index % 2) * 0.1}>
+              <div className="h-full border-t border-fresta py-8">
+                <h3 className="font-display text-xl font-semibold leading-snug text-areia">
+                  {reason.title}
+                </h3>
+                <p className="mt-3 leading-relaxed text-palha">
+                  {reason.description}
+                </p>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-                {reason.title}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                {reason.description}
-              </p>
-            </motion.div>
+            </Reveal>
           ))}
         </div>
-
-        <motion.div
-          className="text-center mt-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-        >
-          <a href="/contato">
-            <button className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-md shadow-lg hover:shadow-xl transition-all text-lg font-medium">
-              Inicie seu projeto agora
-            </button>
-          </a>
-        </motion.div>
       </div>
     </section>
   );
