@@ -1,7 +1,7 @@
 export const site = {
   name: "OCA Software House",
   shortName: "OCA",
-  url: "https://www.ocasoftwarehouse.com.br",
+  url: "https://oca.dev.br",
   description:
     "Software house em São Paulo especializada em MVPs, aplicativos, sistemas e produtos com IA. Mais de 40 mil pessoas usam o que a gente construiu.",
   phone: "+55 11 94962-9527",

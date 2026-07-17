@@ -1,6 +1,6 @@
 # OCA Software House - Portfolio
 
-Site institucional da OCA Software House: [ocasoftwarehouse.com.br](https://www.ocasoftwarehouse.com.br)
+Site institucional da OCA Software House: [oca.dev.br](https://oca.dev.br)
 
 ## 🧰 Stack
 
