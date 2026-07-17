@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/og-image.jpg",
+        url: "/images/og-image.png",
         width: 1200,
         height: 630,
         alt: site.name,
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "OCA Software House - Desenvolvimento de Software Personalizado",
     description: site.description,
-    images: ["/images/og-image.jpg"],
+    images: ["/images/og-image.png"],
   },
   formatDetection: {
     telephone: true,
@@ -88,7 +88,7 @@ export const metadata: Metadata = {
   category: "technology",
   icons: {
     icon: [{ url: "/favicon.ico", sizes: "any" }, { url: "/icon.svg" }],
-    apple: "/icon.svg",
+    apple: "/apple-touch-icon.png",
   },
 };
 
