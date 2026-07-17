@@ -1,42 +1,109 @@
 @import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@theme {
+  /* Palette: burnt earth, straw and urucum pigment */
+  --color-terra: #131110;
+  --color-carvao: #1c1815;
+  --color-fresta: #2e2823;
+  --color-areia: #ece4d6;
+  --color-palha: #a5987f;
+  --color-urucum: #e4551f;
+  --color-urucum-claro: #f2672e;
 
-/* Garantir que o clip-path funcione bem nos gradientes */
-.bg-clip-text {
-  -webkit-background-clip: text;
-  background-clip: text;
+  --font-display: var(--font-bricolage), ui-sans-serif, sans-serif;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
-/* Forçar modo escuro em toda a aplicação */
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
   color-scheme: dark;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
 body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  background-color: var(--color-terra);
+  color: var(--color-areia);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden; /* Prevenir rolagem horizontal em dispositivos móveis */
-  text-rendering: optimizeSpeed; /* Melhorar desempenho de texto em móveis */
+  overflow-x: hidden;
 }
 
-/* Otimizações para toque em dispositivos móveis */
+::selection {
+  background-color: var(--color-urucum);
+  color: var(--color-terra);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-urucum);
+  outline-offset: 2px;
+}
+
+@layer components {
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.75rem;
+    border-radius: 0.375rem;
+    background-color: var(--color-urucum);
+    color: var(--color-terra);
+    font-weight: 600;
+    transition: background-color 150ms ease, transform 150ms ease;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-urucum-claro);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.75rem;
+    border-radius: 0.375rem;
+    border: 1px solid var(--color-fresta);
+    color: var(--color-areia);
+    font-weight: 500;
+    transition: border-color 150ms ease, background-color 150ms ease;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--color-palha);
+    background-color: var(--color-carvao);
+  }
+
+  /* Mono annotation label, the drafting layer of the design */
+  .annotation {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-palha);
+  }
+}
+
+/* Tech ticker in the hero */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
+
 @media (hover: none) and (pointer: coarse) {
-  /* Aumentar área de toque para botões e links para melhor acessibilidade */
   button,
   a,
   [role="button"] {
