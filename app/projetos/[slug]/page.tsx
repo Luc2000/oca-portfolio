@@ -101,7 +101,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 className={
                   project.heroFit === "contain"
                     ? "object-contain p-6"
-                    : "object-cover object-top"
+                    : `object-cover ${project.thumbPosition ?? "object-top"}`
                 }
                 priority
               />

@@ -1,4 +1,4 @@
-export type ProjectCategory = "mobile" | "web" | "data";
+export type ProjectCategory = "mobile" | "web" | "data" | "ai";
 
 export interface Project {
   slug: string;
@@ -78,6 +78,70 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    slug: "voxfield",
+    title: "VoxField",
+    subtitle: "Agente de voz com IA para pesquisas telefônicas",
+    description:
+      "Agente de voz com IA que liga, entrevista e classifica respostas sozinho: pesquisas telefônicas que levariam semanas de call center acontecem em horas.",
+    fullDescription: [
+      "O VoxField automatiza pesquisa telefônica de ponta a ponta: o agente de voz disca, conduz o questionário em português natural, entende as respostas e registra tudo classificado, sem operador humano.",
+      "Por trás, uma máquina de estados controla o fluxo da entrevista para garantir fidelidade ao questionário, enquanto modelos de IA da OpenAI e da Anthropic, intercambiáveis, classificam respostas e aprofundam perguntas abertas. Voz natural com ElevenLabs, transcrição com Deepgram e telefonia via Twilio.",
+      "O produto roda em piloto com um cliente real de pesquisa de mercado, com discador automático, relatórios por pesquisa e controle de custo por ligação.",
+    ],
+    highlight: "Em piloto com cliente real",
+    image: "/images/projetos/voxfield/voxfield.png",
+    thumbPosition: "object-center",
+    images: ["/images/projetos/voxfield/voxfield.png"],
+    tags: ["IA", "OpenAI", "Claude", "TypeScript", "Node.js", "Twilio"],
+    features: [
+      "Conversa por voz em português natural",
+      "Discador automático de contatos",
+      "Classificação de respostas com IA",
+      "Aprofundamento automático de perguntas abertas",
+      "Relatórios por pesquisa",
+      "Custo por ligação monitorado",
+    ],
+    challenges: [
+      "Manter a latência da conversa baixa o suficiente para soar natural ao telefone",
+      "Garantir fidelidade ao questionário com máquina de estados, sem improviso da IA",
+      "Classificar respostas ambíguas com validação entre dois modelos",
+    ],
+    category: "ai",
+    featured: true,
+  },
+  {
+    slug: "rex",
+    title: "REX",
+    subtitle: "Agente comercial com IA",
+    description:
+      "Agente de IA que encontra empresas com perfil de cliente ideal, escreve mensagens personalizadas e dispara por WhatsApp e email. Você só aprova.",
+    fullDescription: [
+      "O REX é um agente comercial com IA: encontra empresas locais com perfil de cliente ideal, enriquece os dados de cada lead e escreve uma abordagem personalizada, uma a uma, sem template com nome trocado.",
+      "O disparo acontece por WhatsApp e email com aprovação humana no meio: nada sai sem o seu ok. A arquitetura é multi-tenant e white-label, pronta para agências e times comerciais.",
+      "A IA da Anthropic orquestra o pipeline inteiro, da busca de leads à redação da mensagem, com landing page bilíngue e lista de espera aberta.",
+    ],
+    highlight: "IA da busca do lead à mensagem enviada",
+    image: "/images/projetos/rex/rex.png",
+    thumbPosition: "object-center",
+    images: ["/images/projetos/rex/rex.png"],
+    tags: ["IA", "Claude", "Next.js", "Python", "Supabase", "WhatsApp"],
+    features: [
+      "Prospecção automática de empresas locais",
+      "Enriquecimento de dados de cada lead",
+      "Mensagens personalizadas geradas por IA",
+      "Disparo por WhatsApp e email",
+      "Aprovação humana antes de cada envio",
+      "Multi-tenant e white-label",
+    ],
+    challenges: [
+      "Gerar personalização real em escala, não template com nome trocado",
+      "Operar WhatsApp de forma estável e segura para mensagens comerciais",
+      "Orquestrar um pipeline multi-tenant com aprovação humana no meio",
+    ],
+    category: "ai",
+    featured: true,
+  },
+  {
     slug: "vipou",
     title: "Vipou",
     subtitle: "Gestão de eventos em tempo real",
@@ -107,7 +171,7 @@ export const projects: Project[] = [
     category: "web",
     link: "https://vipou.app.br",
     linkLabel: "Acessar o site",
-    featured: true,
+    featured: false,
   },
   {
     slug: "meyu",
@@ -146,7 +210,7 @@ export const projects: Project[] = [
     category: "web",
     link: "https://meyu.shop",
     linkLabel: "Acessar o site",
-    featured: true,
+    featured: false,
   },
   {
     slug: "delta-stats",
@@ -180,6 +244,38 @@ export const projects: Project[] = [
     link: "https://deltastats.com.br",
     linkLabel: "Acessar o site",
     featured: true,
+  },
+  {
+    slug: "gestao-imobiliarias",
+    title: "Gestão para Imobiliárias",
+    subtitle: "Locação de ponta a ponta, do contrato ao repasse",
+    description:
+      "Plataforma em produção que roda a operação de locação inteira: contratos, boletos e Pix com repasse automático, assinatura eletrônica e análise de crédito do inquilino.",
+    fullDescription: [
+      "Uma plataforma que roda a operação de locação inteira: cadastro de imóveis e inquilinos, geração de contrato, cobrança e repasse para o proprietário, tudo num lugar só.",
+      "Os pagamentos rodam com boleto e Pix com split automático: o aluguel cai, a taxa da imobiliária se separa sozinha e o proprietário recebe a parte dele. Os contratos são assinados eletronicamente, sem papel.",
+      "A análise de crédito do inquilino é integrada ao fluxo: a imobiliária consulta e decide na hora, antes de fechar contrato. Em produção, construída com Next.js e Supabase.",
+    ],
+    highlight: "Em produção, com operação real de locação",
+    image: "/images/projetos/gestao-imobiliarias/gestao-imobiliarias.png",
+    thumbPosition: "object-center",
+    images: ["/images/projetos/gestao-imobiliarias/gestao-imobiliarias.png"],
+    tags: ["Next.js", "TypeScript", "Supabase", "Pagar.me", "Assinatura eletrônica"],
+    features: [
+      "Gestão de imóveis, contratos e inquilinos",
+      "Boleto e Pix com split automático de repasse",
+      "Assinatura eletrônica de contratos",
+      "Análise de crédito integrada ao fluxo",
+      "Geração automática de contratos",
+      "Relatórios da operação de locação",
+    ],
+    challenges: [
+      "Dividir cada pagamento corretamente entre imobiliária e proprietário",
+      "Montar um fluxo de assinatura eletrônica juridicamente válido",
+      "Modelar contratos flexíveis sem transformar o banco de dados em caos",
+    ],
+    category: "web",
+    featured: false,
   },
 ];
 
@@ -232,10 +328,12 @@ export const categoryLabels: Record<ProjectCategory, string> = {
   mobile: "App mobile",
   web: "Aplicação web",
   data: "Análise de dados",
+  ai: "Produto com IA",
 };
 
 export const categories: { id: ProjectCategory | "all"; name: string }[] = [
   { id: "all", name: "Todos" },
+  { id: "ai", name: "IA" },
   { id: "web", name: "Web" },
   { id: "mobile", name: "Mobile" },
   { id: "data", name: "Análise de Dados" },
