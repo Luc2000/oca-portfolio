@@ -96,7 +96,7 @@ const Footer = () => {
             </h3>
             <div className="flex space-x-4">
               <a
-                href="https://github.com/souzalucas"
+                href="https://github.com/Luc2000"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"
