@@ -221,6 +221,12 @@ export const ndaProjects: NdaProject[] = [
   },
 ];
 
+export const categoryLabels: Record<ProjectCategory, string> = {
+  mobile: "App mobile",
+  web: "Aplicação web",
+  data: "Análise de dados",
+};
+
 export const categories: { id: ProjectCategory | "all"; name: string }[] = [
   { id: "all", name: "Todos" },
   { id: "web", name: "Web" },
