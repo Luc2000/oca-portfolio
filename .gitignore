@@ -2,6 +2,8 @@
 
 # dependencies
 /node_modules
+generator/node_modules
+generator/*.log
 /.pnp
 .pnp.*
 .yarn/*

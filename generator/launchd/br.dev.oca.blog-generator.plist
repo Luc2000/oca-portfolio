@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>br.dev.oca.blog-generator</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/Users/lucasannunziato/Desktop/Pessoal/oca-portfolio-1/generator/generate.sh</string>
+  </array>
+  <!-- 9h/15h = clientes, 11h/17h = devs (audience mapped by hour in blog-config.ts) -->
+  <key>StartCalendarInterval</key>
+  <array>
+    <dict>
+      <key>Hour</key>
+      <integer>9</integer>
+      <key>Minute</key>
+      <integer>0</integer>
+    </dict>
+    <dict>
+      <key>Hour</key>
+      <integer>11</integer>
+      <key>Minute</key>
+      <integer>0</integer>
+    </dict>
+    <dict>
+      <key>Hour</key>
+      <integer>15</integer>
+      <key>Minute</key>
+      <integer>0</integer>
+    </dict>
+    <dict>
+      <key>Hour</key>
+      <integer>17</integer>
+      <key>Minute</key>
+      <integer>0</integer>
+    </dict>
+  </array>
+  <key>StandardOutPath</key>
+  <string>/Users/lucasannunziato/Desktop/Pessoal/oca-portfolio-1/generator/generator.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/lucasannunziato/Desktop/Pessoal/oca-portfolio-1/generator/generator.log</string>
+</dict>
+</plist>

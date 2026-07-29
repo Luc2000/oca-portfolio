@@ -5,7 +5,8 @@ const eslintConfig = [
   ...coreWebVitals,
   ...typescript,
   {
-    ignores: [".next/**", "node_modules/**"],
+    // generator/ is a standalone package with its own tsconfig
+    ignores: [".next/**", "node_modules/**", "generator/**"],
   },
 ];
 

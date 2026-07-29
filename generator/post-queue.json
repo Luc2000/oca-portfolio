@@ -1,0 +1,30 @@
+[
+  {
+    "theme": "Como conseguir os primeiros clientes como dev freelancer sem depender de plataforma gringa",
+    "keyword": "como conseguir clientes como dev freelancer",
+    "category": "freelance-dev",
+    "audience": "devs",
+    "notes": "Flagship dev post. The distribution playbook: presença no Google e nas IAs (a receita da OCA), portfolio que converte, indicação estruturada. End with the partner network invitation: OCA recebe dezenas de leads por dia e repassa projetos qualificados a parceiros."
+  },
+  {
+    "theme": "Quanto cobrar por hora como dev freelancer no Brasil: a conta honesta",
+    "keyword": "quanto cobrar dev freelancer",
+    "category": "freelance-dev",
+    "audience": "devs",
+    "notes": "The pricing math: custo de vida, impostos PJ, horas não faturáveis, margem. Include a worked example in BRL. Warn against precificar por desespero. Mention that OCA's partner projects come pre-scoped, which removes the riskiest part of pricing."
+  },
+  {
+    "theme": "Como contratar uma software house sem cair em cilada",
+    "keyword": "como contratar uma software house",
+    "category": "software-sob-medida",
+    "audience": "clientes",
+    "notes": "Checklist article: perguntas para fazer antes de assinar (quem codifica, propriedade do código, manutenção, prazos), red flags (orçamento sem escopo, promessas de prazo impossíveis), e como comparar propostas. Honest tone builds trust."
+  },
+  {
+    "theme": "Chatbot com IA para atendimento: o que funciona de verdade e o que é hype",
+    "keyword": "chatbot com ia para atendimento",
+    "category": "ia-para-empresas",
+    "audience": "clientes",
+    "notes": "Separate real use cases (triagem, FAQ, agendamento, WhatsApp) from hype. Explain custo real de implementar e manter, quando um fluxo simples resolve sem IA, e quando um agente com IA paga a conta. Ground with VoxField/REX experience."
+  }
+]
