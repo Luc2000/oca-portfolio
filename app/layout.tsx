@@ -57,6 +57,9 @@ export const metadata: Metadata = {
     languages: {
       "pt-BR": "/",
     },
+    types: {
+      "application/rss+xml": "/feed.xml",
+    },
   },
   openGraph: {
     title: "OCA Software House - Desenvolvimento de Software Personalizado",
@@ -104,18 +107,31 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Organization",
+      "@type": "ProfessionalService",
       "@id": `${site.url}/#organization`,
       name: site.name,
       url: site.url,
       logo: `${site.url}/icon.svg`,
+      image: `${site.url}/images/og-image.png`,
       description: site.description,
+      telephone: site.phone,
       address: {
         "@type": "PostalAddress",
         addressLocality: "São Paulo",
         addressRegion: "SP",
         addressCountry: "BR",
       },
+      areaServed: {
+        "@type": "Country",
+        name: "Brasil",
+      },
+      knowsAbout: [
+        "Desenvolvimento de aplicativos mobile",
+        "Desenvolvimento web",
+        "MVP para startups",
+        "Inteligência artificial aplicada a negócios",
+        "Automação com IA",
+      ],
       contactPoint: {
         "@type": "ContactPoint",
         telephone: site.phone,
