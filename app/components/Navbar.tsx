@@ -10,8 +10,10 @@ import { whatsappUrl, defaultWhatsappMessage } from "../data/site";
 
 const navItems = [
   { name: "Home", path: "/" },
+  { name: "Serviços", path: "/servicos" },
   { name: "Projetos", path: "/projetos" },
   { name: "Sobre", path: "/sobre" },
+  { name: "Blog", path: "/blog" },
   { name: "Contato", path: "/contato" },
 ];
 
