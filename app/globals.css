@@ -83,6 +83,135 @@ body {
   }
 }
 
+/* Typography for AI-generated blog post HTML */
+.blog-prose {
+  color: var(--color-palha);
+  font-size: 1.0625rem;
+  line-height: 1.8;
+}
+
+.blog-prose h2 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--color-areia);
+  margin: 2.5rem 0 1rem;
+}
+
+.blog-prose h3 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--color-areia);
+  margin: 2rem 0 0.75rem;
+}
+
+.blog-prose p {
+  margin: 1.25rem 0;
+}
+
+.blog-prose a {
+  color: var(--color-urucum);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.blog-prose a:hover {
+  color: var(--color-urucum-claro);
+}
+
+.blog-prose strong {
+  color: var(--color-areia);
+  font-weight: 600;
+}
+
+.blog-prose ul,
+.blog-prose ol {
+  margin: 1.25rem 0;
+  padding-left: 1.5rem;
+}
+
+.blog-prose ul {
+  list-style: disc;
+}
+
+.blog-prose ol {
+  list-style: decimal;
+}
+
+.blog-prose li {
+  margin: 0.5rem 0;
+}
+
+.blog-prose li::marker {
+  color: var(--color-urucum);
+}
+
+.blog-prose blockquote {
+  border-left: 2px solid var(--color-urucum);
+  padding-left: 1.25rem;
+  margin: 2rem 0;
+  color: var(--color-areia);
+}
+
+.blog-prose img {
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-fresta);
+  margin: 2rem 0;
+  max-width: 100%;
+  height: auto;
+}
+
+.blog-prose code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background-color: var(--color-carvao);
+  border: 1px solid var(--color-fresta);
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.375rem;
+}
+
+.blog-prose pre {
+  background-color: var(--color-carvao);
+  border: 1px solid var(--color-fresta);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  margin: 2rem 0;
+  overflow-x: auto;
+}
+
+.blog-prose pre code {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.blog-prose hr {
+  border-color: var(--color-fresta);
+  margin: 3rem 0;
+}
+
+/* CTA anchor inserted by the post generator */
+.blog-prose a.blog-cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: 0.375rem;
+  background-color: var(--color-urucum);
+  color: var(--color-terra);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 150ms ease;
+}
+
+.blog-prose a.blog-cta-link:hover {
+  background-color: var(--color-urucum-claro);
+  color: var(--color-terra);
+}
+
 /* Tech ticker in the hero */
 @keyframes marquee {
   from {
