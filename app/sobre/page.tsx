@@ -204,9 +204,13 @@ export default function AboutPage() {
 
           <Reveal className="mt-16" delay={0.1}>
             <div className="rounded-lg border border-dashed border-fresta p-8 text-center">
-              <p className="leading-relaxed text-palha">
-                Estamos sempre em busca de talentos para projetos inovadores.
-                Se você é desenvolvedor freelancer,{" "}
+              <p className="font-display text-xl font-semibold text-areia">
+                E mais de 5 devs no nosso banco de talentos
+              </p>
+              <p className="mt-3 leading-relaxed text-palha">
+                Além do time fixo, contamos com desenvolvedores parceiros
+                prontos para entrar em projetos conforme a demanda. Se você é
+                desenvolvedor freelancer,{" "}
                 <a
                   href="/contato"
                   className="text-urucum transition-colors hover:text-urucum-claro"
