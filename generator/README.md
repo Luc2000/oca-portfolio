@@ -44,6 +44,18 @@ publishes normally.
 Four runs per day: 9h and 15h for clients, 11h and 17h for devs. Single plist in
 `launchd/`.
 
+IMPORTANT: macOS TCC blocks launchd agents from reading anything inside
+~/Desktop, ~/Documents and ~/Downloads. The agent runs a standalone copy of this
+directory at `~/Projects/oca-blog-generator` (same pattern as the other blog
+generators on this machine). After editing personas/config here, re-sync:
+
+```bash
+rsync -a --delete --exclude node_modules --exclude generator.log --exclude post-queue.json \
+  generator/ ~/Projects/oca-blog-generator/
+```
+
+`post-queue.json` is excluded because the runtime copy holds the live queue state.
+
 ```bash
 cp launchd/br.dev.oca.blog-generator.plist ~/Library/LaunchAgents/
 launchctl load ~/Library/LaunchAgents/br.dev.oca.blog-generator.plist
