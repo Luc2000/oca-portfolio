@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiX, FiArrowUpRight } from "react-icons/fi";
+import posthog from "posthog-js";
 import OcaMark from "./OcaMark";
 import { whatsappUrl, defaultWhatsappMessage } from "../data/site";
 
@@ -83,6 +84,11 @@ const Navbar = () => {
             href={whatsappUrl(defaultWhatsappMessage)}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() =>
+              posthog.capture("whatsapp_cta_clicked", {
+                placement: "navbar_desktop",
+              })
+            }
             className="btn-primary px-5 py-2.5 text-sm"
           >
             Iniciar projeto
@@ -136,7 +142,12 @@ const Navbar = () => {
                   href={whatsappUrl(defaultWhatsappMessage)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={closeMobileMenu}
+                  onClick={() => {
+                    posthog.capture("whatsapp_cta_clicked", {
+                      placement: "navbar_mobile",
+                    });
+                    closeMobileMenu();
+                  }}
                   className="btn-primary w-full"
                 >
                   Iniciar projeto

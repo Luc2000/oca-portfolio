@@ -1,4 +1,7 @@
+"use client";
+
 import { FiArrowUpRight } from "react-icons/fi";
+import posthog from "posthog-js";
 import Reveal from "./Reveal";
 import OcaMark from "./OcaMark";
 import { whatsappUrl, defaultWhatsappMessage } from "../data/site";
@@ -22,6 +25,9 @@ const ContactCTA = () => {
             href={whatsappUrl(defaultWhatsappMessage)}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() =>
+              posthog.capture("whatsapp_cta_clicked", { placement: "contact_cta" })
+            }
             className="btn-primary mt-10"
           >
             Chamar no WhatsApp

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import posthog from "posthog-js";
 import ProjectCard from "./ProjectCard";
 import { projects, categories, type ProjectCategory } from "../data/projects";
 
@@ -23,7 +24,12 @@ const ProjectsGrid = () => {
         {categories.map((category) => (
           <button
             key={category.id}
-            onClick={() => setSelected(category.id)}
+            onClick={() => {
+              setSelected(category.id);
+              posthog.capture("project_filter_selected", {
+                project_category: category.id,
+              });
+            }}
             aria-pressed={selected === category.id}
             className={`annotation rounded border px-4 py-2.5 transition-colors ${
               selected === category.id

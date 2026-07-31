@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FiArrowLeft, FiArrowUpRight, FiCheck } from "react-icons/fi";
 import Reveal from "../../components/Reveal";
+import TrackedLink from "../../components/TrackedLink";
 import { projects, getProject, categoryLabels } from "../../data/projects";
 import { site, whatsappUrl } from "../../data/site";
 
@@ -204,7 +205,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <Reveal delay={0.2}>
                 <div className="space-y-3">
                   {project.link ? (
-                    <a
+                    <TrackedLink
+                      event="project_external_link_clicked"
+                      eventProps={{ project_slug: project.slug }}
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -212,9 +215,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     >
                       {project.linkLabel ?? "Acessar o projeto"}
                       <FiArrowUpRight />
-                    </a>
+                    </TrackedLink>
                   ) : null}
-                  <a
+                  <TrackedLink
+                    event="whatsapp_cta_clicked"
+                    eventProps={{
+                      placement: "project_page",
+                      project_slug: project.slug,
+                    }}
                     href={whatsappUrl(
                       `Olá Lucas, vim pelo site da OCA e gostaria de discutir um projeto semelhante ao ${project.title}.`
                     )}
@@ -223,7 +231,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     className="btn-secondary w-full"
                   >
                     Quero algo assim
-                  </a>
+                  </TrackedLink>
                 </div>
               </Reveal>
             </div>

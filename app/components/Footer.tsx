@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FiGithub, FiLinkedin, FiPhone } from "react-icons/fi";
 import OcaMark from "./OcaMark";
+import TrackedLink from "./TrackedLink";
 import { site, whatsappUrl, defaultWhatsappMessage } from "../data/site";
 
 const navigation = [
@@ -59,7 +60,9 @@ const Footer = () => {
             <h3 className="annotation mb-6">Contato</h3>
             <ul className="space-y-3 text-palha">
               <li>
-                <a
+                <TrackedLink
+                  event="whatsapp_cta_clicked"
+                  eventProps={{ placement: "footer" }}
                   href={whatsappUrl(defaultWhatsappMessage)}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -67,12 +70,14 @@ const Footer = () => {
                 >
                   <FiPhone className="text-urucum" />
                   <span>{site.phone}</span>
-                </a>
+                </TrackedLink>
               </li>
               <li>{site.location}</li>
             </ul>
             <div className="mt-6 flex gap-3">
-              <a
+              <TrackedLink
+                event="social_link_clicked"
+                eventProps={{ network: "github", placement: "footer" }}
                 href={site.github}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -80,8 +85,10 @@ const Footer = () => {
                 className="flex h-10 w-10 items-center justify-center rounded-md border border-fresta text-palha transition-colors hover:border-palha hover:text-areia"
               >
                 <FiGithub />
-              </a>
-              <a
+              </TrackedLink>
+              <TrackedLink
+                event="social_link_clicked"
+                eventProps={{ network: "linkedin", placement: "footer" }}
                 href={site.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -89,7 +96,7 @@ const Footer = () => {
                 className="flex h-10 w-10 items-center justify-center rounded-md border border-fresta text-palha transition-colors hover:border-palha hover:text-areia"
               >
                 <FiLinkedin />
-              </a>
+              </TrackedLink>
             </div>
           </div>
         </div>

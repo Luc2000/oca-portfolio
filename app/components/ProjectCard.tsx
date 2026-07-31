@@ -1,12 +1,21 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
+import posthog from "posthog-js";
 import { categoryLabels, type Project } from "../data/projects";
 
 const ProjectCard = ({ project }: { project: Project }) => {
   return (
     <Link
       href={`/projetos/${project.slug}`}
+      onClick={() =>
+        posthog.capture("project_opened", {
+          project_slug: project.slug,
+          project_category: project.category,
+        })
+      }
       className="group flex h-full flex-col overflow-hidden rounded-lg border border-fresta bg-carvao transition-colors hover:border-palha"
     >
       <div className="relative h-64 overflow-hidden border-b border-fresta">

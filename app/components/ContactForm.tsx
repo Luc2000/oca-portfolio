@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { FiSend } from "react-icons/fi";
+import posthog from "posthog-js";
 import { whatsappUrl } from "../data/site";
 
 const projectTypes = [
@@ -54,6 +55,14 @@ Tipo de Projeto: ${formData.projectType}
 Mensagem:
 ${formData.message}`;
 
+    posthog.identify(formData.email, {
+      name: formData.name,
+      email: formData.email,
+      company: formData.company || undefined,
+    });
+    posthog.capture("contact_form_submitted", {
+      project_type: formData.projectType,
+    });
     window.open(whatsappUrl(message), "_blank");
 
     setFormData(emptyForm);

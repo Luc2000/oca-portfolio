@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { FiArrowLeft } from "react-icons/fi";
 import Reveal from "../../components/Reveal";
 import BlogPostCard from "../../components/BlogPostCard";
+import BlogCtaTracker from "../../components/BlogCtaTracker";
 import ContactCTA from "../../components/ContactCTA";
 import {
   formatPostDate,
@@ -112,6 +113,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <BlogCtaTracker
+        articleSlug={post.slug}
+        articleCategory={post.category?.slug ?? null}
       />
 
       <article className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">

@@ -1,12 +1,21 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
+import posthog from "posthog-js";
 import { formatPostDate, type BlogPostSummary } from "../lib/blog";
 
 const BlogPostCard = ({ post }: { post: BlogPostSummary }) => {
   return (
     <Link
       href={`/blog/${post.slug}`}
+      onClick={() =>
+        posthog.capture("blog_article_opened", {
+          article_slug: post.slug,
+          article_category: post.category?.slug ?? null,
+        })
+      }
       className="group flex h-full flex-col overflow-hidden rounded-lg border border-fresta bg-carvao transition-colors hover:border-palha"
     >
       {post.featured_image ? (

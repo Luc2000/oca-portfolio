@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FiArrowRight, FiArrowUpRight } from "react-icons/fi";
+import posthog from "posthog-js";
 import OcaBlueprint from "./OcaBlueprint";
 import { whatsappUrl, defaultWhatsappMessage } from "../data/site";
 
@@ -70,6 +71,9 @@ const Hero = () => {
               href={whatsappUrl(defaultWhatsappMessage)}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() =>
+                posthog.capture("whatsapp_cta_clicked", { placement: "hero" })
+              }
               className="btn-primary"
             >
               Iniciar projeto

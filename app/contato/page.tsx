@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { FiLinkedin, FiPhone } from "react-icons/fi";
 import Reveal from "../components/Reveal";
 import SectionHeader from "../components/SectionHeader";
+import TrackedLink from "../components/TrackedLink";
 import ContactForm from "../components/ContactForm";
 import { site, whatsappUrl, defaultWhatsappMessage } from "../data/site";
 
@@ -95,7 +96,9 @@ export default function ContactPage() {
             <Reveal>
               <div className="space-y-10">
                 <div className="space-y-6">
-                  <a
+                  <TrackedLink
+                    event="whatsapp_cta_clicked"
+                    eventProps={{ placement: "contato_page" }}
                     href={whatsappUrl(defaultWhatsappMessage)}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -108,8 +111,10 @@ export default function ContactPage() {
                         {site.phone}
                       </span>
                     </span>
-                  </a>
-                  <a
+                  </TrackedLink>
+                  <TrackedLink
+                    event="social_link_clicked"
+                    eventProps={{ network: "linkedin", placement: "contato_page" }}
                     href={site.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -125,7 +130,7 @@ export default function ContactPage() {
                         linkedin.com/in/lucasannunziato
                       </span>
                     </span>
-                  </a>
+                  </TrackedLink>
                 </div>
 
                 <div>

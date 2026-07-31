@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FiArrowLeft, FiArrowRight, FiCheck } from "react-icons/fi";
 import Reveal from "../../components/Reveal";
+import TrackedLink from "../../components/TrackedLink";
 import ProjectCard from "../../components/ProjectCard";
 import { getService, services } from "../../data/services";
 import { getProject } from "../../data/projects";
@@ -106,14 +107,19 @@ export default async function ServicePage({ params }: ServicePageProps) {
           </p>
 
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-            <a
+            <TrackedLink
+              event="whatsapp_cta_clicked"
+              eventProps={{
+                placement: "service_page",
+                service_slug: service.slug,
+              }}
               href={whatsappUrl(service.whatsappMessage)}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary"
             >
               Iniciar conversa
-            </a>
+            </TrackedLink>
             <Link href="/contato" className="btn-secondary">
               Enviar briefing
             </Link>
