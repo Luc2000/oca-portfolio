@@ -130,7 +130,12 @@ function dateNotes(entry: BackfillEntry): string {
 }
 
 async function main() {
-  console.log(`=== Backfill: ${PLAN.length} posts ===`);
+  // Optional argv: comma-separated PLAN indices, e.g. `tsx src/backfill.ts 8,9,10`
+  const only = process.argv[2];
+  const entries = only
+    ? only.split(",").map((i) => PLAN[Number(i)])
+    : PLAN;
+  console.log(`=== Backfill: ${entries.length} posts ===`);
 
   const recentPosts = await getRecentPosts(60);
   const existingTitles = recentPosts.map((p) => p.title);
@@ -138,7 +143,7 @@ async function main() {
   const recentAuthorNames = recentPosts.map((p) => p.author_name);
 
   let published = 0;
-  for (const entry of PLAN) {
+  for (const entry of entries) {
     const categoryConfig = blogConfig.categories.find(
       (c) => c.slug === entry.category
     );
@@ -199,7 +204,7 @@ async function main() {
     recentAuthorNames.push(writer.name);
   }
 
-  console.log(`\nBackfill done: ${published}/${PLAN.length} posts.`);
+  console.log(`\nBackfill done: ${published}/${entries.length} posts.`);
 }
 
 main().catch((err) => {
