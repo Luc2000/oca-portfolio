@@ -212,7 +212,7 @@ export default function AboutPage() {
                 prontos para entrar em projetos conforme a demanda. Se você é
                 desenvolvedor freelancer,{" "}
                 <a
-                  href="/contato"
+                  href="/parceiros"
                   className="text-urucum transition-colors hover:text-urucum-claro"
                 >
                   junte-se à nossa rede de parceiros

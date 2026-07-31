@@ -10,6 +10,7 @@ const navigation = [
   { name: "Projetos", path: "/projetos" },
   { name: "Sobre Nós", path: "/sobre" },
   { name: "Blog", path: "/blog" },
+  { name: "Parceiros", path: "/parceiros" },
   { name: "Contato", path: "/contato" },
 ];
 
