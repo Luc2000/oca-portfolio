@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { FiCheck } from "react-icons/fi";
+import DevsSection from "../components/DevsSection";
 import Reveal from "../components/Reveal";
 import SectionHeader from "../components/SectionHeader";
 import TrackedLink from "../components/TrackedLink";
 import { site, whatsappUrl } from "../data/site";
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Parceiros | Trabalhe Conosco ou Faça Parceria com a OCA",
@@ -45,6 +48,7 @@ const devBenefits = [
   "Sem plataforma, sem leilão de hora: relação direta com quem já qualificou o cliente",
   "Trabalho remoto, no seu ritmo, projeto a projeto",
   "Você cresce junto: bons parceiros recebem projetos maiores e recorrentes",
+  "Vitrine de devs indicados: apareça no site da OCA e receba contato direto de quem procura um dev",
 ];
 
 const devSteps = [
@@ -169,6 +173,8 @@ export default function PartnersPage() {
           </Reveal>
         </div>
       </section>
+
+      <DevsSection source="parceiros" className="border-b border-fresta py-24" />
 
       <section className="py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">

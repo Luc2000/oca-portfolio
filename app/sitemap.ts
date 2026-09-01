@@ -3,13 +3,15 @@ import { projects } from "./data/projects";
 import { services } from "./data/services";
 import { site } from "./data/site";
 import { getCategories, getPublishedPosts } from "./lib/blog";
+import { getActiveDevs } from "./lib/devs";
 
 export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [posts, categories] = await Promise.all([
+  const [posts, categories, devs] = await Promise.all([
     getPublishedPosts(1000),
     getCategories(),
+    getActiveDevs(),
   ]);
 
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -44,6 +46,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      url: `${site.url}/devs`,
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
   ];
 
   const serviceRoutes: MetadataRoute.Sitemap = services.map((service) => ({
@@ -64,6 +71,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
+  const devRoutes: MetadataRoute.Sitemap = devs.map((dev) => ({
+    url: `${site.url}/devs/${dev.slug}`,
+    changeFrequency: "monthly",
+    priority: 0.5,
+  }));
+
   const postRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
     url: `${site.url}/blog/${post.slug}`,
     lastModified: new Date(post.updated_at),
@@ -77,5 +90,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...projectRoutes,
     ...categoryRoutes,
     ...postRoutes,
+    ...devRoutes,
   ];
 }
