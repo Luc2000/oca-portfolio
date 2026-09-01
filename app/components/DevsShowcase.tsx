@@ -43,8 +43,11 @@ const DevsShowcase = ({ devs, source }: DevsShowcaseProps) => {
   return (
     <div>
       <div ref={trackRef} className={trackClass}>
-        {ordered.map((dev) => (
-          <div key={dev.id} className={itemClass}>
+        {/* Index keys on purpose: the post-hydration shuffle must swap card contents,
+            not move DOM nodes, or the snap container re-snaps to wherever the
+            first card ended up */}
+        {ordered.map((dev, index) => (
+          <div key={index} className={itemClass}>
             <DevCard dev={dev} source={source} />
           </div>
         ))}
