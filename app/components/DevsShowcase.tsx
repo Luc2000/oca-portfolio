@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef, useSyncExternalStore } from "react";
+import { useRef } from "react";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import DevCard from "./DevCard";
 import type { PartnerDev } from "../lib/devs";
+import { useShuffled } from "../lib/use-shuffled";
 
 interface DevsShowcaseProps {
   devs: PartnerDev[];
@@ -13,30 +14,12 @@ interface DevsShowcaseProps {
 // Above this count the desktop grid turns into a carousel; mobile always scrolls past one card
 const CAROUSEL_MIN = 4;
 
-const subscribe = () => () => {};
-
-function shuffle<T>(items: T[]): T[] {
-  const copy = [...items];
-  for (let i = copy.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [copy[i], copy[j]] = [copy[j], copy[i]];
-  }
-  return copy;
-}
-
 const scrollTrackClass =
   "flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden";
 
 const DevsShowcase = ({ devs, source }: DevsShowcaseProps) => {
   const trackRef = useRef<HTMLDivElement>(null);
-  const shuffledRef = useRef<PartnerDev[] | null>(null);
-  // Server and hydration render the DB order; the client then swaps in a
-  // per-visit shuffle without a hydration mismatch
-  const ordered = useSyncExternalStore(
-    subscribe,
-    () => (shuffledRef.current ??= shuffle(devs)),
-    () => devs
-  );
+  const ordered = useShuffled(devs);
 
   const isCarousel = devs.length >= CAROUSEL_MIN;
 
