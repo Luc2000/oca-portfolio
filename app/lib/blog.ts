@@ -1,4 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "./supabase";
 
 export interface BlogCategory {
   id: string;
@@ -29,12 +29,6 @@ export interface BlogPost extends BlogPostSummary {
 const SUMMARY_COLUMNS =
   "id, title, slug, excerpt, tags, featured_image, featured_image_alt, author_name, published_at, updated_at, category:blog_categories(id, slug, name)";
 const POST_COLUMNS = `${SUMMARY_COLUMNS}, content, meta_title, meta_description`;
-
-const url = process.env.SUPABASE_URL;
-const anonKey = process.env.SUPABASE_ANON_KEY;
-
-// Renders the blog empty instead of crashing builds while Supabase env is absent
-const supabase = url && anonKey ? createClient(url, anonKey) : null;
 
 export async function getPublishedPosts(
   limit = 60
