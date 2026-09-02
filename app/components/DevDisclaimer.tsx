@@ -18,22 +18,22 @@ const DevDisclaimer = ({
       >
         <FiInfo className="mt-1 shrink-0 text-urucum" />
         <span>
-          Profissionais independentes, sem vínculo com a OCA. A OCA indica, mas
-          não participa do projeto.
+          Profissionais independentes, sem vínculo com a OCA. Indicamos, mas
+          não participamos do projeto.
         </span>
       </p>
     );
   }
 
   return (
-    <aside className={`rounded-lg border border-fresta bg-carvao p-5 ${className}`}>
+    <aside className={`rounded-lg border border-fresta p-5 ${className}`}>
       <p className="annotation mb-3 text-urucum">Como funciona a indicação</p>
       <p className="text-sm leading-relaxed text-palha">
         Os devs desta vitrine são profissionais independentes, sem vínculo com
-        a OCA. A OCA indica, mas não participa do projeto: negociação, contrato,
-        prazos, entrega e suporte são tratados diretamente com o dev, e a OCA
-        não se responsabiliza por eles. Se prefere a OCA cuidando do projeto de
-        ponta a ponta,{" "}
+        a OCA. Indicamos, mas não participamos do projeto: negociação, contrato,
+        prazos, entrega e suporte são tratados direto com o dev, sem nossa
+        intermediação ou responsabilidade. Se prefere um time cuidando de tudo
+        de ponta a ponta,{" "}
         <Link
           href="/contato"
           className="text-areia underline underline-offset-4 transition-colors hover:text-urucum"
