@@ -26,9 +26,9 @@ const DevsSection = async ({ source, className = "py-24" }: DevsSectionProps) =>
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <Reveal>
           <SectionLabel className="mb-4">
-            Devs indicados / rede independente
+            Devs indicados / contato direto
           </SectionLabel>
-          <div className="grid gap-6 lg:grid-cols-12 lg:items-end">
+          <div className="grid gap-6 lg:grid-cols-12 lg:items-start">
             <h2 className="font-display text-3xl font-semibold tracking-tight text-areia sm:text-4xl lg:col-span-6">
               Devs que a gente indica
             </h2>
