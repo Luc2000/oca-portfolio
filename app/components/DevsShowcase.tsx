@@ -40,8 +40,8 @@ const DevsShowcase = ({ devs, source }: DevsShowcaseProps) => {
     : `${scrollTrackClass} sm:grid sm:grid-cols-2 sm:overflow-visible sm:pb-0 lg:grid-cols-3`;
 
   const itemClass = isCarousel
-    ? "w-[70%] shrink-0 snap-start sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
-    : `${devs.length === 1 ? "w-full" : "w-[70%]"} shrink-0 snap-start sm:w-auto`;
+    ? "w-[85%] shrink-0 snap-start sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
+    : `${devs.length === 1 ? "w-full" : "w-[85%]"} shrink-0 snap-start sm:w-auto`;
 
   return (
     <div>
