@@ -17,6 +17,9 @@ const CAROUSEL_MIN = 4;
 const scrollTrackClass =
   "flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden";
 
+const arrowClass =
+  "flex h-9 w-9 items-center justify-center rounded-md border border-fresta text-palha transition-colors hover:border-palha hover:text-areia";
+
 const DevsShowcase = ({ devs, source }: DevsShowcaseProps) => {
   const trackRef = useRef<HTMLDivElement>(null);
   const ordered = useShuffled(devs);
@@ -37,8 +40,8 @@ const DevsShowcase = ({ devs, source }: DevsShowcaseProps) => {
     : `${scrollTrackClass} sm:grid sm:grid-cols-2 sm:overflow-visible sm:pb-0 lg:grid-cols-3`;
 
   const itemClass = isCarousel
-    ? "w-[85%] shrink-0 snap-start sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
-    : `${devs.length === 1 ? "w-full" : "w-[85%]"} shrink-0 snap-start sm:w-auto`;
+    ? "w-[70%] shrink-0 snap-start sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
+    : `${devs.length === 1 ? "w-full" : "w-[70%]"} shrink-0 snap-start sm:w-auto`;
 
   return (
     <div>
@@ -54,12 +57,12 @@ const DevsShowcase = ({ devs, source }: DevsShowcaseProps) => {
       </div>
 
       {isCarousel ? (
-        <div className="mt-6 flex justify-end gap-3">
+        <div className="mt-5 flex justify-end gap-2">
           <button
             type="button"
             onClick={() => scrollByPage(-1)}
             aria-label="Devs anteriores"
-            className="flex h-10 w-10 items-center justify-center rounded-md border border-fresta text-palha transition-colors hover:border-palha hover:text-areia"
+            className={arrowClass}
           >
             <FiArrowLeft />
           </button>
@@ -67,7 +70,7 @@ const DevsShowcase = ({ devs, source }: DevsShowcaseProps) => {
             type="button"
             onClick={() => scrollByPage(1)}
             aria-label="Próximos devs"
-            className="flex h-10 w-10 items-center justify-center rounded-md border border-fresta text-palha transition-colors hover:border-palha hover:text-areia"
+            className={arrowClass}
           >
             <FiArrowRight />
           </button>
