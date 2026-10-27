@@ -22,7 +22,7 @@ Selected portfolio (all real, most in production):
 - **VoxField** — AI voice agent for phone surveys, piloting with a real client.
 - **REX** — AI sales agent that goes from lead search to outbound message autonomously.
 - **Delta Stats** — statistical analysis product for traders, sold by subscription.
-- **Vipou** — real-time event management.
+- **Painel Revo** — real-time event management.
 - **Meyu** — interactive digital menu.
 - **Gestão para Imobiliárias** — end-to-end rental operations system, in production.
 

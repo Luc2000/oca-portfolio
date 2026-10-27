@@ -121,7 +121,7 @@ export default function AboutPage() {
                 </p>
                 <p className="leading-relaxed text-palha">
                   Além do ecossistema Revo, que inclui o aplicativo Revo, o
-                  gerenciador Vipou e o menu digital Meyu, Lucas trabalhou em
+                  Painel Revo e o menu digital Meyu, Lucas trabalhou em
                   diversos projetos de investimento, adquirindo ampla
                   experiência em transformar ideias em negócios digitais
                   viáveis.

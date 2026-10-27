@@ -44,11 +44,7 @@ export const projects: Project[] = [
     highlight: "+40 mil usuários · Checkout com 90% de conversão",
     image: "/images/projetos/revo/revo-app.png",
     thumbPosition: "object-center",
-    images: [
-      "/images/projetos/revo/revo-checkout.png",
-      "/images/projetos/revo/revo-app.png",
-    ],
-    heroFit: "contain",
+    images: ["/images/projetos/revo/revo-app.png"],
     tags: [
       "React Native",
       "Expo",
@@ -143,16 +139,17 @@ export const projects: Project[] = [
   },
   {
     slug: "vipou",
-    title: "Vipou",
+    title: "Painel Revo",
     subtitle: "Gestão de eventos em tempo real",
     description:
       "Painel de gestão do ecossistema Revo, usado por mais de 7 casas noturnas: eventos, listas, promoters, portaria com QR Code e financeiro em tempo real.",
     fullDescription: [
-      "O Vipou é o painel de controle do ecossistema Revo, usado por mais de 7 casas noturnas: é onde organizadores criam eventos, gerenciam listas e promoters, acompanham vendas e fecham o caixa.",
+      "O Painel Revo é a central de controle do ecossistema Revo, usado por mais de 7 casas noturnas: é onde organizadores criam eventos, gerenciam listas e promoters, acompanham vendas e fecham o caixa.",
       "Construído com Next.js e TypeScript sobre o mesmo backend Supabase do app, o dashboard exibe métricas de venda em tempo real, sem atraso entre a compra no app e o número na tela.",
       "Controle de acesso por perfil, relatórios financeiros detalhados e exportação de dados dão ao organizador autonomia total sobre a operação do evento.",
     ],
     image: "/images/projetos/vipou/vipou.png",
+    thumbPosition: "object-center",
     images: ["/images/projetos/vipou/vipou.png"],
     tags: ["Next.js", "React", "TypeScript", "MUI", "Supabase"],
     features: [
@@ -185,6 +182,7 @@ export const projects: Project[] = [
       "Com pagamento integrado via Pagar.me e análise dos itens mais vendidos, o estabelecimento ganha giro de mesa e visibilidade da operação.",
     ],
     image: "/images/projetos/meyu/meyu.png",
+    thumbPosition: "object-center",
     images: ["/images/projetos/meyu/meyu.png"],
     tags: [
       "React",
@@ -225,6 +223,7 @@ export const projects: Project[] = [
     ],
     highlight: "Produto vivo, vendido por assinatura",
     image: "/images/projetos/delta/delta.png",
+    thumbPosition: "object-center",
     images: ["/images/projetos/delta/delta.png"],
     tags: ["Next.js", "TypeScript", "Supabase", "Python", "ApexCharts"],
     features: [
