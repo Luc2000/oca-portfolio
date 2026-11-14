@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Reveal from "../components/Reveal";
-import BlogPostCard from "../components/BlogPostCard";
+import BlogPostGrid from "../components/BlogPostGrid";
 import ContactCTA from "../components/ContactCTA";
 import { getCategories, getPublishedPosts } from "../lib/blog";
 import { pageMetadata } from "../lib/seo";
@@ -55,21 +55,10 @@ export default async function BlogPage() {
 
       <section className="pb-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          {posts.length > 0 ? (
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {posts.map((post, index) => (
-                <Reveal key={post.id} delay={0.05 * (index % 3)}>
-                  <BlogPostCard post={post} />
-                </Reveal>
-              ))}
-            </div>
-          ) : (
-            <Reveal>
-              <p className="annotation">
-                Os primeiros artigos ainda estão na prancheta. Volte em breve.
-              </p>
-            </Reveal>
-          )}
+          <BlogPostGrid
+            posts={posts}
+            emptyMessage="Os primeiros artigos ainda estão na prancheta. Volte em breve."
+          />
         </div>
       </section>
 
