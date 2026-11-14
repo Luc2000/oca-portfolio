@@ -15,6 +15,8 @@ interface PageMetadataInput {
   /* Canonical path, starting with "/" */
   path: string;
   image?: SocialImage;
+  /* Path of the page's Markdown version, advertised as an alternate */
+  markdownPath?: string;
   /* Present on blog posts: switches the card to og:type article */
   article?: {
     publishedTime: string;
@@ -37,6 +39,7 @@ export function pageMetadata({
   description,
   path,
   image = defaultSocialImage,
+  markdownPath,
   article,
 }: PageMetadataInput): Metadata {
   const shared = {
@@ -51,7 +54,10 @@ export function pageMetadata({
   return {
     title,
     description,
-    alternates: { canonical: path },
+    alternates: {
+      canonical: path,
+      types: markdownPath ? { "text/markdown": markdownPath } : undefined,
+    },
     openGraph: article
       ? { ...shared, type: "article", ...article }
       : { ...shared, type: "website" },

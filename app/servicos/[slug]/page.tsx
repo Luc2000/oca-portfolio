@@ -29,6 +29,7 @@ export async function generateMetadata({
     title: service.headline,
     description: service.summary,
     path: `/servicos/${service.slug}`,
+    markdownPath: `/servicos/${service.slug}.md`,
   });
 }
 

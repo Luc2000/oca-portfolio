@@ -44,6 +44,11 @@ const nextConfig: NextConfig = {
   // First-party proxy for PostHog so ad blockers don't drop events
   async rewrites() {
     return [
+      // Markdown version of each service page, for AI assistants
+      {
+        source: "/servicos/:slug.md",
+        destination: "/servicos/:slug/md",
+      },
       {
         source: "/ingest/static/:path*",
         destination: "https://us-assets.i.posthog.com/static/:path*",
