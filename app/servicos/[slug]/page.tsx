@@ -8,6 +8,7 @@ import ProjectCard from "../../components/ProjectCard";
 import { getService, services } from "../../data/services";
 import { getProject } from "../../data/projects";
 import { site, whatsappUrl } from "../../data/site";
+import { pageMetadata } from "../../lib/seo";
 
 interface ServicePageProps {
   params: Promise<{ slug: string }>;
@@ -24,18 +25,11 @@ export async function generateMetadata({
   const service = getService(slug);
   if (!service) return {};
 
-  return {
+  return pageMetadata({
     title: service.headline,
     description: service.summary,
-    alternates: {
-      canonical: `/servicos/${service.slug}`,
-    },
-    openGraph: {
-      title: `${service.name} | OCA Software House`,
-      description: service.summary,
-      url: `/servicos/${service.slug}`,
-    },
-  };
+    path: `/servicos/${service.slug}`,
+  });
 }
 
 export default async function ServicePage({ params }: ServicePageProps) {
