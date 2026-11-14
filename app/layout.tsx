@@ -43,8 +43,8 @@ export const metadata: Metadata = {
     "software house são paulo",
     "desenvolvimento personalizado",
   ],
-  authors: [{ name: "Lucas Annunziato", url: site.linkedin }],
-  creator: "Lucas Annunziato",
+  authors: [{ name: site.founder, url: site.linkedin }],
+  creator: site.founder,
   publisher: site.name,
   applicationName: site.name,
   robots: {
@@ -140,7 +140,7 @@ const jsonLd = {
       },
       founder: {
         "@type": "Person",
-        name: "Lucas Annunziato",
+        name: site.founder,
         url: site.linkedin,
       },
       sameAs: [site.github, site.linkedin],
