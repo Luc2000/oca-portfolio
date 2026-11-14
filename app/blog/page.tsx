@@ -2,7 +2,8 @@ import Link from "next/link";
 import Reveal from "../components/Reveal";
 import BlogPostGrid from "../components/BlogPostGrid";
 import ContactCTA from "../components/ContactCTA";
-import { getCategories, getPublishedPosts } from "../lib/blog";
+import Pagination from "../components/Pagination";
+import { getCategories, getPostsPage } from "../lib/blog";
 import { pageMetadata } from "../lib/seo";
 
 export const revalidate = 3600;
@@ -15,8 +16,8 @@ export const metadata = pageMetadata({
 });
 
 export default async function BlogPage() {
-  const [posts, categories] = await Promise.all([
-    getPublishedPosts(),
+  const [{ posts, totalPages }, categories] = await Promise.all([
+    getPostsPage(1),
     getCategories(),
   ]);
 
@@ -59,6 +60,7 @@ export default async function BlogPage() {
             posts={posts}
             emptyMessage="Os primeiros artigos ainda estão na prancheta. Volte em breve."
           />
+          <Pagination basePath="/blog" page={1} totalPages={totalPages} />
         </div>
       </section>
 

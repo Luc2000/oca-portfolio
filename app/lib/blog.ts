@@ -77,20 +77,44 @@ export async function getCategory(slug: string): Promise<BlogCategory | null> {
   return data;
 }
 
-export async function getPostsByCategory(
-  categoryId: string,
-  limit = 60
-): Promise<BlogPostSummary[]> {
-  if (!supabase) return [];
-  const { data, error } = await supabase
+export const POSTS_PER_PAGE = 24;
+
+export interface PostsPage {
+  posts: BlogPostSummary[];
+  totalPages: number;
+}
+
+/* Page numbers come from the URL: anything that is not a positive integer is null */
+export function parsePageParam(value: string): number | null {
+  const page = Number(value);
+  return Number.isInteger(page) && page >= 1 ? page : null;
+}
+
+export async function getPostsPage(
+  page: number,
+  categoryId?: string
+): Promise<PostsPage> {
+  if (!supabase) return { posts: [], totalPages: 0 };
+  const from = (page - 1) * POSTS_PER_PAGE;
+
+  let query = supabase
     .from("blog_posts")
-    .select(SUMMARY_COLUMNS)
-    .eq("status", "published")
-    .eq("category_id", categoryId)
+    .select(SUMMARY_COLUMNS, { count: "exact" })
+    .eq("status", "published");
+  if (categoryId) query = query.eq("category_id", categoryId);
+
+  const { data, count, error } = await query
     .order("published_at", { ascending: false })
-    .limit(limit);
+    .range(from, from + POSTS_PER_PAGE - 1);
+
+  // PostgREST answers a page past the last row with an error instead of an empty list
+  if (error?.code === "PGRST103") return { posts: [], totalPages: 0 };
   if (error) throw new Error(error.message);
-  return (data ?? []) as unknown as BlogPostSummary[];
+
+  return {
+    posts: (data ?? []) as unknown as BlogPostSummary[],
+    totalPages: Math.ceil((count ?? 0) / POSTS_PER_PAGE),
+  };
 }
 
 export async function getRelatedPosts(

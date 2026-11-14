@@ -5,11 +5,8 @@ import { FiArrowLeft } from "react-icons/fi";
 import Reveal from "../../../components/Reveal";
 import BlogPostGrid from "../../../components/BlogPostGrid";
 import ContactCTA from "../../../components/ContactCTA";
-import {
-  getCategories,
-  getCategory,
-  getPostsByCategory,
-} from "../../../lib/blog";
+import Pagination from "../../../components/Pagination";
+import { getCategories, getCategory, getPostsPage } from "../../../lib/blog";
 import { site } from "../../../data/site";
 import { pageMetadata } from "../../../lib/seo";
 
@@ -43,7 +40,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const category = await getCategory(slug);
   if (!category) notFound();
 
-  const posts = await getPostsByCategory(category.id);
+  const { posts, totalPages } = await getPostsPage(1, category.id);
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -90,6 +87,11 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           <BlogPostGrid
             posts={posts}
             emptyMessage="Ainda não há artigos nesta categoria. Volte em breve."
+          />
+          <Pagination
+            basePath={`/blog/categoria/${category.slug}`}
+            page={1}
+            totalPages={totalPages}
           />
         </div>
       </section>
