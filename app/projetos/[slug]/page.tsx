@@ -7,6 +7,7 @@ import Reveal from "../../components/Reveal";
 import TrackedLink from "../../components/TrackedLink";
 import { projects, getProject, categoryLabels } from "../../data/projects";
 import { site, whatsappUrl } from "../../data/site";
+import { pageMetadata } from "../../lib/seo";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -23,19 +24,12 @@ export async function generateMetadata({
   const project = getProject(slug);
   if (!project) return {};
 
-  return {
+  return pageMetadata({
     title: `${project.title} - ${project.subtitle}`,
     description: project.description,
-    alternates: {
-      canonical: `/projetos/${project.slug}`,
-    },
-    openGraph: {
-      title: `${project.title} | OCA Software House`,
-      description: project.description,
-      url: `/projetos/${project.slug}`,
-      images: [{ url: project.image, alt: `Tela do projeto ${project.title}` }],
-    },
-  };
+    path: `/projetos/${project.slug}`,
+    image: { url: project.image, alt: `Tela do projeto ${project.title}` },
+  });
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {

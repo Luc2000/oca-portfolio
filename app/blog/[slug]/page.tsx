@@ -15,6 +15,7 @@ import {
   readingTimeMinutes,
 } from "../../lib/blog";
 import { site } from "../../data/site";
+import { pageMetadata } from "../../lib/seo";
 
 export const revalidate = 3600;
 
@@ -34,27 +35,24 @@ export async function generateMetadata({
   const post = await getPost(slug);
   if (!post) return {};
 
-  const description = post.meta_description ?? post.excerpt;
-
   return {
-    title: post.meta_title ?? post.title,
-    description,
-    authors: [{ name: post.author_name }],
-    alternates: {
-      canonical: `/blog/${post.slug}`,
-    },
-    openGraph: {
+    ...pageMetadata({
       title: post.meta_title ?? post.title,
-      description,
-      url: `/blog/${post.slug}`,
-      type: "article",
-      publishedTime: post.published_at,
-      modifiedTime: post.updated_at,
-      authors: [post.author_name],
-      images: post.featured_image
-        ? [{ url: post.featured_image, alt: post.featured_image_alt ?? post.title }]
+      description: post.meta_description ?? post.excerpt,
+      path: `/blog/${post.slug}`,
+      image: post.featured_image
+        ? {
+            url: post.featured_image,
+            alt: post.featured_image_alt ?? post.title,
+          }
         : undefined,
-    },
+      article: {
+        publishedTime: post.published_at,
+        modifiedTime: post.updated_at,
+        authors: [post.author_name],
+      },
+    }),
+    authors: [{ name: post.author_name }],
   };
 }
 
