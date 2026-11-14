@@ -1,26 +1,18 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "../components/Reveal";
 import BlogPostCard from "../components/BlogPostCard";
 import ContactCTA from "../components/ContactCTA";
 import { getCategories, getPublishedPosts } from "../lib/blog";
+import { pageMetadata } from "../lib/seo";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Blog | Aplicativos, MVPs, IA e Software Sob Medida",
   description:
     "Guias práticos sobre como criar aplicativos, tirar MVPs do papel, aplicar IA em negócios e contratar software sob medida, escritos por quem constrói produto todos os dias.",
-  alternates: {
-    canonical: "/blog",
-  },
-  openGraph: {
-    title: "Blog | OCA Software House",
-    description:
-      "Guias práticos sobre aplicativos, MVPs, IA e software sob medida, escritos por quem constrói produto todos os dias.",
-    url: "/blog",
-  },
-};
+  path: "/blog",
+});
 
 export default async function BlogPage() {
   const [posts, categories] = await Promise.all([

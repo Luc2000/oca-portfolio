@@ -11,6 +11,7 @@ import {
   getPostsByCategory,
 } from "../../../lib/blog";
 import { site } from "../../../data/site";
+import { pageMetadata } from "../../../lib/seo";
 
 export const revalidate = 3600;
 
@@ -30,18 +31,11 @@ export async function generateMetadata({
   const category = await getCategory(slug);
   if (!category) return {};
 
-  return {
+  return pageMetadata({
     title: `${category.name} | Blog`,
     description: `Artigos sobre ${category.name.toLowerCase()}: guias práticos escritos pela equipe da OCA Software House.`,
-    alternates: {
-      canonical: `/blog/categoria/${category.slug}`,
-    },
-    openGraph: {
-      title: `${category.name} | Blog OCA Software House`,
-      description: `Artigos sobre ${category.name.toLowerCase()}: guias práticos escritos pela equipe da OCA Software House.`,
-      url: `/blog/categoria/${category.slug}`,
-    },
-  };
+    path: `/blog/categoria/${category.slug}`,
+  });
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
