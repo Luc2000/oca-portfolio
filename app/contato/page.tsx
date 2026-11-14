@@ -7,7 +7,7 @@ import { site, whatsappUrl, defaultWhatsappMessage } from "../data/site";
 import { pageMetadata } from "../lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Contato | Fale com a OCA Software House",
+  title: "Contato",
   description:
     "Entre em contato com a OCA Software House para discutir seu projeto. Estamos prontos para transformar sua ideia em um produto digital de sucesso.",
   path: "/contato",

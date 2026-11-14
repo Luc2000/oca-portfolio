@@ -5,7 +5,7 @@ import ContactCTA from "../components/ContactCTA";
 import { pageMetadata } from "../lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Sobre Nós | Conheça a OCA Software House",
+  title: "Sobre Nós",
   description:
     "Somos uma software house especializada em aplicativos, sistemas web e MVPs. Conheça nossa história, nossa equipe e como transformamos ideias em negócios digitais.",
   path: "/sobre",
