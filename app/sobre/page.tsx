@@ -2,6 +2,7 @@ import Image from "next/image";
 import Reveal from "../components/Reveal";
 import SectionHeader from "../components/SectionHeader";
 import ContactCTA from "../components/ContactCTA";
+import { site } from "../data/site";
 import { pageMetadata } from "../lib/seo";
 
 export const metadata = pageMetadata({
@@ -11,29 +12,12 @@ export const metadata = pageMetadata({
   path: "/sobre",
 });
 
-const teamMembers = [
-  {
-    name: "Lucas Annunziato",
-    role: "Fundador & Desenvolvedor Full Stack",
-    bio: "Desenvolvedor com mais de 7 anos de experiência, especializado em JavaScript e ecossistemas React. Fundador do Revo, uma plataforma completa de busca de eventos e venda de ingressos, e todo seu ecossistema de produtos.",
-    image: "/images/team/annunziato.png",
-    imagePosition: "object-center",
-  },
-  {
-    name: "Gabriela Dionelli",
-    role: "Desenvolvedora Full Stack",
-    bio: "Especialista em design de interfaces com foco em experiência do usuário e estratégias de marketing digital. Com background em psicologia e design thinking, traz uma abordagem centrada no usuário para criar produtos intuitivos e visualmente impactantes.",
-    image: "/images/team/gabriela.png",
-    imagePosition: "object-top",
-  },
-  {
-    name: "Rafael Oliveira",
-    role: "Desenvolvedor Full Stack",
-    bio: "Desenvolvedor com 5 anos de experiência em tecnologias front-end e back-end. Especialista em React, Node.js e arquiteturas em nuvem. Possui grande habilidade em resolver problemas complexos e otimizar aplicações para alta performance.",
-    image: "/images/team/rafael.png",
-    imagePosition: "object-center",
-  },
-];
+const founder = {
+  name: site.founder,
+  role: "Fundador & Desenvolvedor Full Stack",
+  bio: "Desenvolvedor com mais de 7 anos de experiência, especializado em JavaScript e ecossistemas React. Fundador do Revo, uma plataforma completa de busca de eventos e venda de ingressos, e todo seu ecossistema de produtos.",
+  image: "/images/team/annunziato.png",
+};
 
 const values = [
   {
@@ -166,53 +150,51 @@ export default function AboutPage() {
             lede="Os profissionais por trás dos produtos que construímos."
           />
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            {teamMembers.map((member, index) => (
-              <Reveal key={member.name} delay={index * 0.1}>
-                <div className="flex h-full flex-col overflow-hidden rounded-lg border border-fresta bg-carvao">
-                  <div className="relative aspect-square w-full border-b border-fresta">
-                    <Image
-                      src={member.image}
-                      alt={`Foto de ${member.name}`}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className={`object-cover ${member.imagePosition}`}
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="font-display text-xl font-semibold text-areia">
-                      {member.name}
-                    </h3>
-                    <p className="annotation mt-2 mb-4 text-urucum">
-                      {member.role}
-                    </p>
-                    <p className="text-sm leading-relaxed text-palha">
-                      {member.bio}
-                    </p>
-                  </div>
+            <Reveal>
+              <div className="flex h-full flex-col overflow-hidden rounded-lg border border-fresta bg-carvao">
+                <div className="relative aspect-square w-full border-b border-fresta">
+                  <Image
+                    src={founder.image}
+                    alt={`Foto de ${founder.name}`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover object-center"
+                  />
                 </div>
-              </Reveal>
-            ))}
-          </div>
+                <div className="p-6">
+                  <h3 className="font-display text-xl font-semibold text-areia">
+                    {founder.name}
+                  </h3>
+                  <p className="annotation mt-2 mb-4 text-urucum">
+                    {founder.role}
+                  </p>
+                  <p className="text-sm leading-relaxed text-palha">
+                    {founder.bio}
+                  </p>
+                </div>
+              </div>
+            </Reveal>
 
-          <Reveal className="mt-16" delay={0.1}>
-            <div className="rounded-lg border border-dashed border-fresta p-8 text-center">
-              <p className="font-display text-xl font-semibold text-areia">
-                E mais de 30 devs no nosso banco de talentos
-              </p>
-              <p className="mt-3 leading-relaxed text-palha">
-                Além do time fixo, contamos com desenvolvedores parceiros
-                prontos para entrar em projetos conforme a demanda. Se você é
-                desenvolvedor freelancer,{" "}
-                <a
-                  href="/parceiros"
-                  className="text-urucum transition-colors hover:text-urucum-claro"
-                >
-                  junte-se à nossa rede de parceiros
-                </a>
-                .
-              </p>
-            </div>
-          </Reveal>
+            <Reveal className="md:col-span-2" delay={0.1}>
+              <div className="flex h-full flex-col justify-center rounded-lg border border-dashed border-fresta p-8">
+                <p className="font-display text-xl font-semibold text-areia">
+                  E mais de 30 devs no nosso banco de talentos
+                </p>
+                <p className="mt-3 leading-relaxed text-palha">
+                  Além do time fixo, contamos com desenvolvedores parceiros
+                  prontos para entrar em projetos conforme a demanda. Se você é
+                  desenvolvedor freelancer,{" "}
+                  <a
+                    href="/parceiros"
+                    className="text-urucum transition-colors hover:text-urucum-claro"
+                  >
+                    junte-se à nossa rede de parceiros
+                  </a>
+                  .
+                </p>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 
