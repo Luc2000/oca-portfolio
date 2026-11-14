@@ -1,4 +1,4 @@
-import { contactFaq } from "../data/faq";
+import { companyFaq, contactFaq } from "../data/faq";
 import { projects } from "../data/projects";
 import { services } from "../data/services";
 import { site } from "../data/site";
@@ -34,7 +34,7 @@ export function GET() {
     "",
     "# Perguntas frequentes",
     "",
-    ...faqMarkdown(contactFaq),
+    ...faqMarkdown([...companyFaq, ...contactFaq]),
   ].join("\n");
 
   return new Response(body, {
