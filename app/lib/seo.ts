@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { FaqItem } from "../data/faq";
 import { site } from "../data/site";
 
 interface SocialImage {
@@ -67,5 +68,17 @@ export function pageMetadata({
       description,
       images: [image.url],
     },
+  };
+}
+
+/* FAQPage node without @context, so it fits both a standalone script and a @graph */
+export function faqPageSchema(items: FaqItem[]) {
+  return {
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
   };
 }

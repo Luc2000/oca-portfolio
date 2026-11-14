@@ -5,7 +5,7 @@ import TrackedLink from "../components/TrackedLink";
 import ContactForm from "../components/ContactForm";
 import { contactFaq } from "../data/faq";
 import { site, whatsappUrl, defaultWhatsappMessage } from "../data/site";
-import { pageMetadata } from "../lib/seo";
+import { faqPageSchema, pageMetadata } from "../lib/seo";
 
 export const metadata = pageMetadata({
   title: "Contato",
@@ -16,15 +16,7 @@ export const metadata = pageMetadata({
 
 const faqJsonLd = {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: contactFaq.map((faq) => ({
-    "@type": "Question",
-    name: faq.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: faq.answer,
-    },
-  })),
+  ...faqPageSchema(contactFaq),
 };
 
 export default function ContactPage() {
