@@ -4,7 +4,8 @@ import type { BlogPostSummary } from "../lib/blog";
 
 interface BlogPostGridProps {
   posts: BlogPostSummary[];
-  emptyMessage: string;
+  /* Listings that 404 when empty leave this out */
+  emptyMessage?: string;
 }
 
 const BlogPostGrid = ({ posts, emptyMessage }: BlogPostGridProps) => {
