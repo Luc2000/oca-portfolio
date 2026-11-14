@@ -16,8 +16,10 @@ cd "$(dirname "$0")"
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-# Ensure PATH includes Node.js, claude CLI, and homebrew (cron uses minimal PATH)
-export PATH="/opt/homebrew/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.nvm/versions/node/$(ls $HOME/.nvm/versions/node 2>/dev/null | tail -1)/bin:/usr/bin:/bin:$PATH"
+# Ensure PATH includes Node.js, claude CLI, and homebrew (cron uses minimal PATH).
+# ~/.local/bin first: the native Claude installer self-updates; stale brew/npm
+# copies reject newer model aliases and silently kill every run.
+export PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:$HOME/.nvm/versions/node/$(ls $HOME/.nvm/versions/node 2>/dev/null | tail -1)/bin:/usr/bin:/bin:$PATH"
 
 # Load env vars
 if [ -f .env ]; then

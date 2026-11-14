@@ -1,30 +1,23 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "../components/Reveal";
-import BlogPostCard from "../components/BlogPostCard";
+import BlogPostGrid from "../components/BlogPostGrid";
 import ContactCTA from "../components/ContactCTA";
-import { getCategories, getPublishedPosts } from "../lib/blog";
+import Pagination from "../components/Pagination";
+import { getCategories, getPostsPage } from "../lib/blog";
+import { pageMetadata } from "../lib/seo";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Blog | Aplicativos, MVPs, IA e Software Sob Medida",
   description:
     "Guias práticos sobre como criar aplicativos, tirar MVPs do papel, aplicar IA em negócios e contratar software sob medida, escritos por quem constrói produto todos os dias.",
-  alternates: {
-    canonical: "/blog",
-  },
-  openGraph: {
-    title: "Blog | OCA Software House",
-    description:
-      "Guias práticos sobre aplicativos, MVPs, IA e software sob medida, escritos por quem constrói produto todos os dias.",
-    url: "/blog",
-  },
-};
+  path: "/blog",
+});
 
 export default async function BlogPage() {
-  const [posts, categories] = await Promise.all([
-    getPublishedPosts(),
+  const [{ posts, totalPages }, categories] = await Promise.all([
+    getPostsPage(1),
     getCategories(),
   ]);
 
@@ -63,21 +56,11 @@ export default async function BlogPage() {
 
       <section className="pb-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          {posts.length > 0 ? (
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {posts.map((post, index) => (
-                <Reveal key={post.id} delay={0.05 * (index % 3)}>
-                  <BlogPostCard post={post} />
-                </Reveal>
-              ))}
-            </div>
-          ) : (
-            <Reveal>
-              <p className="annotation">
-                Os primeiros artigos ainda estão na prancheta. Volte em breve.
-              </p>
-            </Reveal>
-          )}
+          <BlogPostGrid
+            posts={posts}
+            emptyMessage="Os primeiros artigos ainda estão na prancheta. Volte em breve."
+          />
+          <Pagination basePath="/blog" page={1} totalPages={totalPages} />
         </div>
       </section>
 

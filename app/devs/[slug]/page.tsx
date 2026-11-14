@@ -24,6 +24,7 @@ import {
   getDev,
   type PartnerDev,
 } from "../../lib/devs";
+import { pageMetadata } from "../../lib/seo";
 
 export const revalidate = 3600;
 
@@ -66,20 +67,12 @@ export async function generateMetadata({
 
   const description = `${dev.headline}. Dev independente indicado pela OCA: contato e negociação direto com o profissional.`;
 
-  return {
+  return pageMetadata({
     title: `${dev.name} | Dev Indicado`,
     description,
-    alternates: {
-      canonical: `/devs/${dev.slug}`,
-    },
-    openGraph: {
-      title: `${dev.name}, ${dev.headline}`,
-      description,
-      url: `/devs/${dev.slug}`,
-      type: "profile",
-      images: [{ url: dev.photo_url, alt: `Foto de ${dev.name}` }],
-    },
-  };
+    path: `/devs/${dev.slug}`,
+    image: { url: dev.photo_url, alt: `Foto de ${dev.name}` },
+  });
 }
 
 export default async function DevPage({ params }: DevPageProps) {

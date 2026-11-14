@@ -15,6 +15,7 @@ import {
   readingTimeMinutes,
 } from "../../lib/blog";
 import { site } from "../../data/site";
+import { pageMetadata } from "../../lib/seo";
 
 export const revalidate = 3600;
 
@@ -34,27 +35,24 @@ export async function generateMetadata({
   const post = await getPost(slug);
   if (!post) return {};
 
-  const description = post.meta_description ?? post.excerpt;
-
   return {
-    title: post.meta_title ?? post.title,
-    description,
-    authors: [{ name: post.author_name }],
-    alternates: {
-      canonical: `/blog/${post.slug}`,
-    },
-    openGraph: {
+    ...pageMetadata({
       title: post.meta_title ?? post.title,
-      description,
-      url: `/blog/${post.slug}`,
-      type: "article",
-      publishedTime: post.published_at,
-      modifiedTime: post.updated_at,
-      authors: [post.author_name],
-      images: post.featured_image
-        ? [{ url: post.featured_image, alt: post.featured_image_alt ?? post.title }]
+      description: post.meta_description ?? post.excerpt,
+      path: `/blog/${post.slug}`,
+      image: post.featured_image
+        ? {
+            url: post.featured_image,
+            alt: post.featured_image_alt ?? post.title,
+          }
         : undefined,
-    },
+      article: {
+        publishedTime: post.published_at,
+        modifiedTime: post.updated_at,
+        authors: [post.author_name],
+      },
+    }),
+    authors: [{ name: post.author_name }],
   };
 }
 
@@ -65,6 +63,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const relatedPosts = await getRelatedPosts(post);
   const readingTime = readingTimeMinutes(post.content);
+  const signedByFounder = post.author_name === site.founder;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -78,10 +77,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         datePublished: post.published_at,
         dateModified: post.updated_at,
         inLanguage: "pt-BR",
-        author: {
-          "@type": "Person",
-          name: post.author_name,
-        },
+        author: signedByFounder
+          ? {
+              "@type": "Person",
+              "@id": `${site.url}/#founder`,
+              name: site.founder,
+              url: `${site.url}/sobre`,
+            }
+          : {
+              "@type": "Organization",
+              "@id": `${site.url}/#organization`,
+              name: site.name,
+              url: site.url,
+            },
         publisher: { "@id": `${site.url}/#organization` },
         mainEntityOfPage: `${site.url}/blog/${post.slug}`,
         keywords: post.tags.join(", "),
@@ -143,7 +151,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {post.title}
           </h1>
           <p className="annotation mt-6 normal-case tracking-normal">
-            {post.author_name} ·{" "}
+            {signedByFounder ? (
+              <Link
+                href="/sobre"
+                className="transition-colors hover:text-areia"
+              >
+                {post.author_name}
+              </Link>
+            ) : (
+              post.author_name
+            )}{" "}
+            ·{" "}
             <time dateTime={post.published_at}>
               {formatPostDate(post.published_at)}
             </time>{" "}

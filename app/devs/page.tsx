@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { FiArrowUpRight } from "react-icons/fi";
 import ContactCTA from "../components/ContactCTA";
 import DevDisclaimer from "../components/DevDisclaimer";
@@ -8,23 +7,16 @@ import Reveal from "../components/Reveal";
 import TrackedLink from "../components/TrackedLink";
 import { getActiveDevs } from "../lib/devs";
 import { whatsappUrl } from "../data/site";
+import { pageMetadata } from "../lib/seo";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Devs Indicados | Profissionais Independentes Recomendados pela OCA",
   description:
     "Devs independentes que a OCA conhece e indica. Fale direto com o profissional, negocie direto e pague menos do que contratando uma software house.",
-  alternates: {
-    canonical: "/devs",
-  },
-  openGraph: {
-    title: "Devs Indicados | OCA Software House",
-    description:
-      "Devs independentes que a OCA conhece e indica. Contato e negociação direto com o profissional.",
-    url: "/devs",
-  },
-};
+  path: "/devs",
+});
 
 export default async function DevsPage() {
   const devs = await getActiveDevs();

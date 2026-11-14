@@ -7,6 +7,7 @@ export const site = {
   phone: "+55 11 94962-9527",
   whatsapp: "5511949629527",
   location: "São Paulo, SP - Brasil",
+  founder: "Lucas Annunziato",
   github: "https://github.com/Luc2000",
   linkedin: "https://www.linkedin.com/in/lucasannunziato/",
 };

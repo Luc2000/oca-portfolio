@@ -1,25 +1,17 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 import Reveal from "../components/Reveal";
 import ContactCTA from "../components/ContactCTA";
 import { services } from "../data/services";
 import { site } from "../data/site";
+import { pageMetadata } from "../lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Serviços | Aplicativos, MVPs, IA e Software Sob Medida",
   description:
     "O que a OCA constrói: aplicativos mobile, MVPs para startups, IA aplicada a empresas e software sob medida. Proposta fechada, time senior, produtos em produção.",
-  alternates: {
-    canonical: "/servicos",
-  },
-  openGraph: {
-    title: "Serviços | OCA Software House",
-    description:
-      "Aplicativos mobile, MVPs para startups, IA aplicada a empresas e software sob medida.",
-    url: "/servicos",
-  },
-};
+  path: "/servicos",
+});
 
 const breadcrumbJsonLd = {
   "@context": "https://schema.org",

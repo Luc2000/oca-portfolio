@@ -3,6 +3,7 @@ import DevsSection from "./components/DevsSection";
 import Services from "./components/Services";
 import FeaturedProjects from "./components/FeaturedProjects";
 import WhyChooseUs from "./components/WhyChooseUs";
+import CompanyFaq from "./components/CompanyFaq";
 import ContactCTA from "./components/ContactCTA";
 
 export const revalidate = 3600;
@@ -15,6 +16,7 @@ export default function Home() {
       <Services />
       <FeaturedProjects />
       <WhyChooseUs />
+      <CompanyFaq />
       <ContactCTA />
     </>
   );

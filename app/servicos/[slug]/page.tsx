@@ -5,9 +5,11 @@ import { FiArrowLeft, FiArrowRight, FiCheck } from "react-icons/fi";
 import Reveal from "../../components/Reveal";
 import TrackedLink from "../../components/TrackedLink";
 import ProjectCard from "../../components/ProjectCard";
+import FaqList from "../../components/FaqList";
 import { getService, services } from "../../data/services";
 import { getProject } from "../../data/projects";
 import { site, whatsappUrl } from "../../data/site";
+import { faqPageSchema, pageMetadata } from "../../lib/seo";
 
 interface ServicePageProps {
   params: Promise<{ slug: string }>;
@@ -24,18 +26,12 @@ export async function generateMetadata({
   const service = getService(slug);
   if (!service) return {};
 
-  return {
+  return pageMetadata({
     title: service.headline,
     description: service.summary,
-    alternates: {
-      canonical: `/servicos/${service.slug}`,
-    },
-    openGraph: {
-      title: `${service.name} | OCA Software House`,
-      description: service.summary,
-      url: `/servicos/${service.slug}`,
-    },
-  };
+    path: `/servicos/${service.slug}`,
+    markdownPath: `/servicos/${service.slug}.md`,
+  });
 }
 
 export default async function ServicePage({ params }: ServicePageProps) {
@@ -61,13 +57,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
         areaServed: { "@type": "Country", name: "Brasil" },
       },
       {
-        "@type": "FAQPage",
         "@id": `${site.url}/servicos/${service.slug}#faq`,
-        mainEntity: service.faq.map((item) => ({
-          "@type": "Question",
-          name: item.question,
-          acceptedAnswer: { "@type": "Answer", text: item.answer },
-        })),
+        ...faqPageSchema(service.faq),
       },
       {
         "@type": "BreadcrumbList",
@@ -206,16 +197,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
               <h2 className="annotation shrink-0">Perguntas frequentes</h2>
               <span aria-hidden="true" className="block h-px flex-1 bg-fresta" />
             </div>
-            <div className="divide-y divide-fresta rounded-lg border border-fresta bg-carvao">
-              {service.faq.map((item) => (
-                <details key={item.question} className="group p-6">
-                  <summary className="font-display cursor-pointer list-none text-lg font-semibold text-areia">
-                    <h3 className="inline">{item.question}</h3>
-                  </summary>
-                  <p className="mt-3 leading-relaxed text-palha">{item.answer}</p>
-                </details>
-              ))}
-            </div>
+            <FaqList items={service.faq} />
           </section>
         </Reveal>
 

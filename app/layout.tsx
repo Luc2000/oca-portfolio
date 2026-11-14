@@ -3,6 +3,7 @@ import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { services } from "./data/services";
 import { site } from "./data/site";
 
 const bricolage = Bricolage_Grotesque({
@@ -43,8 +44,8 @@ export const metadata: Metadata = {
     "software house são paulo",
     "desenvolvimento personalizado",
   ],
-  authors: [{ name: "Lucas Annunziato", url: site.linkedin }],
-  creator: "Lucas Annunziato",
+  authors: [{ name: site.founder, url: site.linkedin }],
+  creator: site.founder,
   publisher: site.name,
   applicationName: site.name,
   robots: {
@@ -89,6 +90,10 @@ export const metadata: Metadata = {
     address: true,
   },
   category: "technology",
+  // Bing Webmaster Tools ownership check: must stay in place to remain verified
+  verification: {
+    other: { "msvalidate.01": "A324B9C85629936F712892C8B29A942A" },
+  },
   icons: {
     icon: [{ url: "/favicon.ico", sizes: "any" }, { url: "/icon.svg" }],
     apple: "/apple-touch-icon.png",
@@ -138,12 +143,30 @@ const jsonLd = {
         contactType: "sales",
         availableLanguage: ["Portuguese", "English"],
       },
-      founder: {
-        "@type": "Person",
-        name: "Lucas Annunziato",
-        url: site.linkedin,
+      founder: { "@id": `${site.url}/#founder` },
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Serviços",
+        itemListElement: services.map((service) => ({
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            "@id": `${site.url}/servicos/${service.slug}#service`,
+            name: service.headline,
+            url: `${site.url}/servicos/${service.slug}`,
+          },
+        })),
       },
-      sameAs: [site.github, site.linkedin],
+    },
+    // The GitHub and LinkedIn profiles are the founder's, not the company's
+    {
+      "@type": "Person",
+      "@id": `${site.url}/#founder`,
+      name: site.founder,
+      jobTitle: "Fundador",
+      url: `${site.url}/sobre`,
+      worksFor: { "@id": `${site.url}/#organization` },
+      sameAs: [site.linkedin, site.github],
     },
     {
       "@type": "WebSite",

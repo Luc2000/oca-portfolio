@@ -3,14 +3,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FiArrowLeft } from "react-icons/fi";
 import Reveal from "../../../components/Reveal";
-import BlogPostCard from "../../../components/BlogPostCard";
+import BlogPostGrid from "../../../components/BlogPostGrid";
 import ContactCTA from "../../../components/ContactCTA";
-import {
-  getCategories,
-  getCategory,
-  getPostsByCategory,
-} from "../../../lib/blog";
+import Pagination from "../../../components/Pagination";
+import { getCategories, getCategory, getPostsPage } from "../../../lib/blog";
 import { site } from "../../../data/site";
+import { pageMetadata } from "../../../lib/seo";
 
 export const revalidate = 3600;
 
@@ -30,18 +28,11 @@ export async function generateMetadata({
   const category = await getCategory(slug);
   if (!category) return {};
 
-  return {
+  return pageMetadata({
     title: `${category.name} | Blog`,
     description: `Artigos sobre ${category.name.toLowerCase()}: guias práticos escritos pela equipe da OCA Software House.`,
-    alternates: {
-      canonical: `/blog/categoria/${category.slug}`,
-    },
-    openGraph: {
-      title: `${category.name} | Blog OCA Software House`,
-      description: `Artigos sobre ${category.name.toLowerCase()}: guias práticos escritos pela equipe da OCA Software House.`,
-      url: `/blog/categoria/${category.slug}`,
-    },
-  };
+    path: `/blog/categoria/${category.slug}`,
+  });
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
@@ -49,7 +40,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const category = await getCategory(slug);
   if (!category) notFound();
 
-  const posts = await getPostsByCategory(category.id);
+  const { posts, totalPages } = await getPostsPage(1, category.id);
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -93,21 +84,15 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
       <section className="pb-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          {posts.length > 0 ? (
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {posts.map((post, index) => (
-                <Reveal key={post.id} delay={0.05 * (index % 3)}>
-                  <BlogPostCard post={post} />
-                </Reveal>
-              ))}
-            </div>
-          ) : (
-            <Reveal>
-              <p className="annotation">
-                Ainda não há artigos nesta categoria. Volte em breve.
-              </p>
-            </Reveal>
-          )}
+          <BlogPostGrid
+            posts={posts}
+            emptyMessage="Ainda não há artigos nesta categoria. Volte em breve."
+          />
+          <Pagination
+            basePath={`/blog/categoria/${category.slug}`}
+            page={1}
+            totalPages={totalPages}
+          />
         </div>
       </section>
 

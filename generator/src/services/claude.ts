@@ -27,13 +27,25 @@ function runClaude(systemPrompt: string, userPrompt: string): Promise<string> {
     const env = { ...process.env };
     delete env.CLAUDECODE;
 
+    // --safe-mode keeps the machine's global Claude Code setup (CLAUDE.md, plugins,
+    // hooks, MCPs, effort) out of the run, so model and effort are pinned here.
     const child = execFile(
       "claude",
-      ["-p", "--output-format", "text"],
-      { maxBuffer: 5 * 1024 * 1024, timeout: 300_000, env },
+      [
+        "-p",
+        "--output-format", "text",
+        "--safe-mode",
+        "--tools", "",
+        "--no-session-persistence",
+        "--model", "opus",
+        "--effort", "high",
+      ],
+      { maxBuffer: 5 * 1024 * 1024, timeout: 600_000, env },
       (error, stdout, stderr) => {
         if (error) {
-          reject(new Error(`Claude CLI failed: ${error.message}\n${stderr}`));
+          // Old CLIs print the failure reason to stdout, not stderr
+          const output = `${stdout}${stderr}`.trim().slice(0, 2000);
+          reject(new Error(`Claude CLI failed: ${error.message}\n${output}`));
           return;
         }
         resolve(stdout);

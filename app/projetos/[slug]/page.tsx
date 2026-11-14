@@ -7,6 +7,7 @@ import Reveal from "../../components/Reveal";
 import TrackedLink from "../../components/TrackedLink";
 import { projects, getProject, categoryLabels } from "../../data/projects";
 import { site, whatsappUrl } from "../../data/site";
+import { pageMetadata } from "../../lib/seo";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -23,19 +24,12 @@ export async function generateMetadata({
   const project = getProject(slug);
   if (!project) return {};
 
-  return {
+  return pageMetadata({
     title: `${project.title} - ${project.subtitle}`,
     description: project.description,
-    alternates: {
-      canonical: `/projetos/${project.slug}`,
-    },
-    openGraph: {
-      title: `${project.title} | OCA Software House`,
-      description: project.description,
-      url: `/projetos/${project.slug}`,
-      images: [{ url: project.image, alt: `Tela do projeto ${project.title}` }],
-    },
-  };
+    path: `/projetos/${project.slug}`,
+    image: { url: project.image, alt: `Tela do projeto ${project.title}` },
+  });
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
@@ -43,22 +37,37 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const project = getProject(slug);
   if (!project) notFound();
 
-  const breadcrumbJsonLd = {
+  const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+    "@graph": [
       {
-        "@type": "ListItem",
-        position: 2,
-        name: "Projetos",
-        item: `${site.url}/projetos`,
+        "@type": "CreativeWork",
+        "@id": `${site.url}/projetos/${project.slug}#project`,
+        name: project.title,
+        headline: project.subtitle,
+        description: project.description,
+        url: `${site.url}/projetos/${project.slug}`,
+        image: `${site.url}${project.image}`,
+        keywords: project.tags.join(", "),
+        creator: { "@id": `${site.url}/#organization` },
       },
       {
-        "@type": "ListItem",
-        position: 3,
-        name: project.title,
-        item: `${site.url}/projetos/${project.slug}`,
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Projetos",
+            item: `${site.url}/projetos`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: project.title,
+            item: `${site.url}/projetos/${project.slug}`,
+          },
+        ],
       },
     ],
   };
@@ -67,7 +76,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     <div className="pt-28 pb-24">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">

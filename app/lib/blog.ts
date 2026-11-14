@@ -1,3 +1,4 @@
+import { site } from "../data/site";
 import { supabase } from "./supabase";
 
 export interface BlogCategory {
@@ -30,6 +31,16 @@ const SUMMARY_COLUMNS =
   "id, title, slug, excerpt, tags, featured_image, featured_image_alt, author_name, published_at, updated_at, category:blog_categories(id, slug, name)";
 const POST_COLUMNS = `${SUMMARY_COLUMNS}, content, meta_title, meta_description`;
 
+export const TEAM_BYLINE = "Equipe OCA";
+
+// Only the founder signs posts in public. The rest of the team is credited as
+// the company, so their names never reach the page or its structured data.
+function withPublicAuthor<T extends { author_name: string }>(post: T): T {
+  return post.author_name === site.founder
+    ? post
+    : { ...post, author_name: TEAM_BYLINE };
+}
+
 export async function getPublishedPosts(
   limit = 60
 ): Promise<BlogPostSummary[]> {
@@ -41,7 +52,8 @@ export async function getPublishedPosts(
     .order("published_at", { ascending: false })
     .limit(limit);
   if (error) throw new Error(error.message);
-  return (data ?? []) as unknown as BlogPostSummary[];
+  const posts = (data ?? []) as unknown as BlogPostSummary[];
+  return posts.map(withPublicAuthor);
 }
 
 export async function getPost(slug: string): Promise<BlogPost | null> {
@@ -53,7 +65,8 @@ export async function getPost(slug: string): Promise<BlogPost | null> {
     .eq("slug", slug)
     .maybeSingle();
   if (error) throw new Error(error.message);
-  return data as unknown as BlogPost | null;
+  const post = data as unknown as BlogPost | null;
+  return post && withPublicAuthor(post);
 }
 
 export async function getCategories(): Promise<BlogCategory[]> {
@@ -77,20 +90,45 @@ export async function getCategory(slug: string): Promise<BlogCategory | null> {
   return data;
 }
 
-export async function getPostsByCategory(
-  categoryId: string,
-  limit = 60
-): Promise<BlogPostSummary[]> {
-  if (!supabase) return [];
-  const { data, error } = await supabase
+export const POSTS_PER_PAGE = 24;
+
+export interface PostsPage {
+  posts: BlogPostSummary[];
+  totalPages: number;
+}
+
+/* Page numbers come from the URL: anything that is not a positive integer is null */
+export function parsePageParam(value: string): number | null {
+  const page = Number(value);
+  return Number.isInteger(page) && page >= 1 ? page : null;
+}
+
+export async function getPostsPage(
+  page: number,
+  categoryId?: string
+): Promise<PostsPage> {
+  if (!supabase) return { posts: [], totalPages: 0 };
+  const from = (page - 1) * POSTS_PER_PAGE;
+
+  let query = supabase
     .from("blog_posts")
-    .select(SUMMARY_COLUMNS)
-    .eq("status", "published")
-    .eq("category_id", categoryId)
+    .select(SUMMARY_COLUMNS, { count: "exact" })
+    .eq("status", "published");
+  if (categoryId) query = query.eq("category_id", categoryId);
+
+  const { data, count, error } = await query
     .order("published_at", { ascending: false })
-    .limit(limit);
+    .range(from, from + POSTS_PER_PAGE - 1);
+
+  // PostgREST answers a page past the last row with an error instead of an empty list
+  if (error?.code === "PGRST103") return { posts: [], totalPages: 0 };
   if (error) throw new Error(error.message);
-  return (data ?? []) as unknown as BlogPostSummary[];
+
+  const posts = (data ?? []) as unknown as BlogPostSummary[];
+  return {
+    posts: posts.map(withPublicAuthor),
+    totalPages: Math.ceil((count ?? 0) / POSTS_PER_PAGE),
+  };
 }
 
 export async function getRelatedPosts(
@@ -107,7 +145,8 @@ export async function getRelatedPosts(
     .order("published_at", { ascending: false })
     .limit(limit);
   if (error) throw new Error(error.message);
-  return (data ?? []) as unknown as BlogPostSummary[];
+  const posts = (data ?? []) as unknown as BlogPostSummary[];
+  return posts.map(withPublicAuthor);
 }
 
 export function formatPostDate(iso: string): string {

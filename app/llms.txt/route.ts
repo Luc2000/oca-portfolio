@@ -1,6 +1,7 @@
 import { projects } from "../data/projects";
 import { services } from "../data/services";
 import { site } from "../data/site";
+import { companyFacts } from "../lib/markdown";
 
 // llms.txt (llmstxt.org): resumo do site em Markdown para assistentes de IA
 export const dynamic = "force-static";
@@ -13,17 +14,20 @@ export function GET() {
     "",
     "A OCA desenvolve aplicativos iOS e Android, sistemas web, MVPs para startups e soluções com inteligência artificial. Também assume projetos já começados, inclusive apps feitos com IA, para auditar, finalizar e publicar nas lojas. O cliente conta o projeto, recebe uma faixa de investimento e um prazo, e só depois marca a conversa para fechar.",
     "",
-    `Contato: WhatsApp ${site.phone} (${`https://wa.me/${site.whatsapp}`}) ou ${site.url}/contato. Sede: ${site.location}.`,
+    "## Fatos",
+    "",
+    ...companyFacts.map((fact) => `- ${fact}`),
     "",
     "## Serviços",
     "",
     ...services.map(
       (service) =>
-        `- [${service.headline}](${site.url}/servicos/${service.slug}): ${service.summary}`,
+        `- [${service.headline}](${site.url}/servicos/${service.slug}.md): ${service.summary}`,
     ),
     "",
     "## Guias de preço e decisão",
     "",
+    `- [Quanto custa desenvolver software](${site.url}/precos): o que move o preço em cada tipo de projeto.`,
     ...services.flatMap((service) =>
       service.guides.map(
         (guide) => `- [${guide.title}](${site.url}/blog/${guide.slug})`,
@@ -47,6 +51,7 @@ export function GET() {
     `- [Sobre a OCA](${site.url}/sobre)`,
     `- [Blog](${site.url}/blog)`,
     `- [Todos os serviços](${site.url}/servicos)`,
+    `- [Conteúdo completo em um arquivo](${site.url}/llms-full.txt)`,
     "",
   ];
 

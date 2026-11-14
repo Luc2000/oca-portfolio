@@ -7,6 +7,7 @@ import { site, whatsappUrl, defaultWhatsappMessage } from "../data/site";
 const navigation = [
   { name: "Home", path: "/" },
   { name: "Serviços", path: "/servicos" },
+  { name: "Preços", path: "/precos" },
   { name: "Projetos", path: "/projetos" },
   { name: "Sobre Nós", path: "/sobre" },
   { name: "Blog", path: "/blog" },
