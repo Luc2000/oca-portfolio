@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 
 interface RevealProps {
   children: React.ReactNode;
@@ -8,17 +8,39 @@ interface RevealProps {
   delay?: number;
 }
 
-const Reveal = ({ children, className, delay = 0 }: RevealProps) => {
+const Reveal = ({ children, className = "", delay = 0 }: RevealProps) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    // Server HTML stays visible. Only what is still below the fold gets the
+    // entrance, so the first screen never waits for JavaScript to paint.
+    if (element.getBoundingClientRect().top < window.innerHeight) return;
+
+    element.dataset.reveal = "pending";
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        element.dataset.reveal = "shown";
+        observer.disconnect();
+      },
+      { rootMargin: "0px 0px -80px 0px" }
+    );
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, delay, ease: [0.21, 0.6, 0.35, 1] }}
+    <div
+      ref={ref}
+      className={`reveal ${className}`}
+      style={delay ? { transitionDelay: `${delay}s` } : undefined}
     >
       {children}
-    </motion.div>
+    </div>
   );
 };
 

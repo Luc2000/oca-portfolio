@@ -212,6 +212,18 @@ body {
   color: var(--color-terra);
 }
 
+/* Scroll entrance: visible by default, Reveal.tsx hides only what starts below the fold */
+.reveal[data-reveal="pending"] {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.reveal[data-reveal="shown"] {
+  transition:
+    opacity 0.6s cubic-bezier(0.21, 0.6, 0.35, 1),
+    transform 0.6s cubic-bezier(0.21, 0.6, 0.35, 1);
+}
+
 /* Tech ticker in the hero */
 @keyframes marquee {
   from {
@@ -229,6 +241,11 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee {
     animation: none;
+  }
+
+  .reveal[data-reveal="pending"] {
+    opacity: 1;
+    transform: none;
   }
 }
 
