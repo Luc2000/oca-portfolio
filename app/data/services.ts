@@ -1,11 +1,8 @@
+import type { FaqItem } from "./faq";
+
 export interface ServiceStep {
   title: string;
   description: string;
-}
-
-export interface ServiceFaq {
-  question: string;
-  answer: string;
 }
 
 export interface ServiceGuide {
@@ -28,7 +25,7 @@ export interface Service {
   blogCategoryName: string;
   whatsappMessage: string;
   /* Rendered as visible FAQ + FAQPage JSON-LD */
-  faq: ServiceFaq[];
+  faq: FaqItem[];
   /* Cornerstone blog posts for this service (internal links) */
   guides: ServiceGuide[];
 }
