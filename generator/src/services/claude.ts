@@ -33,7 +33,9 @@ function runClaude(systemPrompt: string, userPrompt: string): Promise<string> {
       { maxBuffer: 5 * 1024 * 1024, timeout: 300_000, env },
       (error, stdout, stderr) => {
         if (error) {
-          reject(new Error(`Claude CLI failed: ${error.message}\n${stderr}`));
+          // Old CLIs print the failure reason to stdout, not stderr
+          const output = `${stdout}${stderr}`.trim().slice(0, 2000);
+          reject(new Error(`Claude CLI failed: ${error.message}\n${output}`));
           return;
         }
         resolve(stdout);
