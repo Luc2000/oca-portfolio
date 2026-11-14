@@ -3,6 +3,7 @@ import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { services } from "./data/services";
 import { site } from "./data/site";
 
 const bricolage = Bricolage_Grotesque({
@@ -139,6 +140,19 @@ const jsonLd = {
         availableLanguage: ["Portuguese", "English"],
       },
       founder: { "@id": `${site.url}/#founder` },
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Serviços",
+        itemListElement: services.map((service) => ({
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            "@id": `${site.url}/servicos/${service.slug}#service`,
+            name: service.headline,
+            url: `${site.url}/servicos/${service.slug}`,
+          },
+        })),
+      },
     },
     // The GitHub and LinkedIn profiles are the founder's, not the company's
     {
