@@ -77,11 +77,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         datePublished: post.published_at,
         dateModified: post.updated_at,
         inLanguage: "pt-BR",
-        author: {
-          "@id": signedByFounder
-            ? `${site.url}/#founder`
-            : `${site.url}/#organization`,
-        },
+        author: signedByFounder
+          ? {
+              "@type": "Person",
+              "@id": `${site.url}/#founder`,
+              name: site.founder,
+              url: `${site.url}/sobre`,
+            }
+          : {
+              "@type": "Organization",
+              "@id": `${site.url}/#organization`,
+              name: site.name,
+              url: site.url,
+            },
         publisher: { "@id": `${site.url}/#organization` },
         mainEntityOfPage: `${site.url}/blog/${post.slug}`,
         keywords: post.tags.join(", "),
