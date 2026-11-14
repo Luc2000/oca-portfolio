@@ -138,12 +138,17 @@ const jsonLd = {
         contactType: "sales",
         availableLanguage: ["Portuguese", "English"],
       },
-      founder: {
-        "@type": "Person",
-        name: site.founder,
-        url: site.linkedin,
-      },
-      sameAs: [site.github, site.linkedin],
+      founder: { "@id": `${site.url}/#founder` },
+    },
+    // The GitHub and LinkedIn profiles are the founder's, not the company's
+    {
+      "@type": "Person",
+      "@id": `${site.url}/#founder`,
+      name: site.founder,
+      jobTitle: "Fundador",
+      url: `${site.url}/sobre`,
+      worksFor: { "@id": `${site.url}/#organization` },
+      sameAs: [site.linkedin, site.github],
     },
     {
       "@type": "WebSite",
