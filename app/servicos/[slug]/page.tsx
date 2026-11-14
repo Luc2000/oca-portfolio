@@ -61,6 +61,15 @@ export default async function ServicePage({ params }: ServicePageProps) {
         areaServed: { "@type": "Country", name: "Brasil" },
       },
       {
+        "@type": "FAQPage",
+        "@id": `${site.url}/servicos/${service.slug}#faq`,
+        mainEntity: service.faq.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: { "@type": "Answer", text: item.answer },
+        })),
+      },
+      {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: site.url },
@@ -187,6 +196,49 @@ export default async function ServicePage({ params }: ServicePageProps) {
                   <ProjectCard key={project.slug} project={project} />
                 ))}
               </div>
+            </section>
+          </Reveal>
+        ) : null}
+
+        <Reveal className="mt-20">
+          <section>
+            <div className="mb-8 flex items-center gap-4">
+              <h2 className="annotation shrink-0">Perguntas frequentes</h2>
+              <span aria-hidden="true" className="block h-px flex-1 bg-fresta" />
+            </div>
+            <div className="divide-y divide-fresta rounded-lg border border-fresta bg-carvao">
+              {service.faq.map((item) => (
+                <details key={item.question} className="group p-6">
+                  <summary className="font-display cursor-pointer list-none text-lg font-semibold text-areia">
+                    <h3 className="inline">{item.question}</h3>
+                  </summary>
+                  <p className="mt-3 leading-relaxed text-palha">{item.answer}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+        </Reveal>
+
+        {service.guides.length > 0 ? (
+          <Reveal className="mt-20">
+            <section>
+              <div className="mb-8 flex items-center gap-4">
+                <h2 className="annotation shrink-0">Guias para decidir</h2>
+                <span aria-hidden="true" className="block h-px flex-1 bg-fresta" />
+              </div>
+              <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                {service.guides.map((guide) => (
+                  <li key={guide.slug}>
+                    <Link
+                      href={`/blog/${guide.slug}`}
+                      className="flex items-center justify-between gap-4 rounded-lg border border-fresta bg-carvao p-5 text-areia transition-colors hover:border-urucum"
+                    >
+                      <span className="leading-snug">{guide.title}</span>
+                      <FiArrowRight className="shrink-0 text-urucum" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </section>
           </Reveal>
         ) : null}

@@ -16,6 +16,7 @@ import {
 } from "./utils/schedule.js";
 import { toSlug, ensureUniqueSlug } from "./utils/slug.js";
 import { takeNext } from "./services/queue.js";
+import { findSimilarTitle } from "./utils/similarity.js";
 
 async function main() {
   console.log("=== AI Blog Generator ===");
@@ -33,10 +34,25 @@ async function main() {
   console.log(`Audience: ${audience.toUpperCase()}`);
 
   // Fetch context
-  const recentPosts = await getRecentPosts(60);
+  const allPosts = await getRecentPosts(2000);
+  const recentPosts = allPosts.slice(0, 60);
+
+  // Cadence guard: at most one post every minDaysBetweenPosts (SEO: no scaled content)
+  const lastPublishedAt = allPosts.find((p) => p.published_at)?.published_at;
+  if (lastPublishedAt && !config.dryRun) {
+    const daysSince = (Date.now() - new Date(lastPublishedAt).getTime()) / 86_400_000;
+    if (daysSince < blogConfig.schedule.minDaysBetweenPosts) {
+      console.log(
+        `Skipped: last post ${daysSince.toFixed(1)} days ago (min ${blogConfig.schedule.minDaysBetweenPosts}).`
+      );
+      return;
+    }
+  }
+
   const recentCategorySlugs = recentPosts.map((p) => p.category_slug);
   const recentAuthorNames = recentPosts.map((p) => p.author_name);
-  const existingTitles = recentPosts.map((p) => p.title);
+  // Every title (published or consolidated) so the model never rewrites an existing topic
+  const existingTitles = allPosts.map((p) => p.title);
   const existingSlugs = await getExistingSlugs();
   console.log(`${recentPosts.length} existing posts in database.`);
 
@@ -62,6 +78,13 @@ async function main() {
     existingTitles,
     queued ? { theme: queued.theme, keyword: queued.keyword, notes: queued.notes } : undefined
   );
+
+  // Duplicate guard: same topic as an existing post -> do not publish
+  const similar = findSimilarTitle(generated.title, existingTitles);
+  if (similar) {
+    console.log(`Skipped: "${generated.title}" repeats "${similar}".`);
+    return;
+  }
 
   // 5. Unique slug
   const safeSlug = ensureUniqueSlug(toSlug(generated.slug), existingSlugs);

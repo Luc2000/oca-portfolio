@@ -9,8 +9,11 @@ a deploy.
 
 ## How a run works
 
-1. Audience picked by wall-clock hour (`devsHours: [11, 17]` → 11h/17h runs write for
+1. Audience picked by wall-clock hour (`devsHours: [11]` → 11h runs write for
    devs/partner network, any other hour writes for clients).
+   Guards (SEO, no scaled content): the run is skipped if the last post is newer than
+   `minDaysBetweenPosts`, and the generated post is discarded if its title repeats an
+   existing topic (`src/utils/similarity.ts`, checked against every post in the table).
 2. `post-queue.json` checked first; queued themes jump the line and are consumed.
 3. Otherwise category round-robin (least used in the last 60 posts) + writer round-robin.
 4. Prompt = `ecosystem.md` + `writers/<persona>.md` + rules from `blog-config.ts`,
@@ -41,7 +44,7 @@ publishes normally.
 
 ## Scheduling (launchd, macOS)
 
-Four runs per day: 9h and 15h for clients, 11h and 17h for devs. Single plist in
+Three runs per week: Tue and Thu 9h for clients, Sat 11h for devs. Single plist in
 `launchd/`.
 
 IMPORTANT: macOS TCC blocks launchd agents from reading anything inside

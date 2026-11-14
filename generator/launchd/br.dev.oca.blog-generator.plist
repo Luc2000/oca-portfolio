@@ -9,30 +9,30 @@
     <string>/bin/bash</string>
     <string>/Users/lucasannunziato/Projects/oca-blog-generator/generate.sh</string>
   </array>
-  <!-- 9h/15h = clientes, 11h/17h = devs (audience mapped by hour in blog-config.ts) -->
+  <!-- ter e qui 9h = clientes, sáb 11h = devs (audience mapped by hour in blog-config.ts) -->
   <key>StartCalendarInterval</key>
   <array>
     <dict>
+      <key>Weekday</key>
+      <integer>2</integer>
       <key>Hour</key>
       <integer>9</integer>
       <key>Minute</key>
       <integer>0</integer>
     </dict>
     <dict>
+      <key>Weekday</key>
+      <integer>4</integer>
+      <key>Hour</key>
+      <integer>9</integer>
+      <key>Minute</key>
+      <integer>0</integer>
+    </dict>
+    <dict>
+      <key>Weekday</key>
+      <integer>6</integer>
       <key>Hour</key>
       <integer>11</integer>
-      <key>Minute</key>
-      <integer>0</integer>
-    </dict>
-    <dict>
-      <key>Hour</key>
-      <integer>15</integer>
-      <key>Minute</key>
-      <integer>0</integer>
-    </dict>
-    <dict>
-      <key>Hour</key>
-      <integer>17</integer>
       <key>Minute</key>
       <integer>0</integer>
     </dict>

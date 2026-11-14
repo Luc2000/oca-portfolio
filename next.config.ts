@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import blogRedirects from "./app/data/blog-redirects.json";
 
 const nextConfig: NextConfig = {
   turbopack: {
@@ -20,6 +21,14 @@ const nextConfig: NextConfig = {
         hostname: "avatars.githubusercontent.com",
       },
     ],
+  },
+  // Duplicate blog posts consolidated into one canonical post per topic (SEO, 14/11/2026)
+  async redirects() {
+    return blogRedirects.map(({ from, to }) => ({
+      source: `/blog/${from}`,
+      destination: `/blog/${to}`,
+      permanent: true,
+    }));
   },
   // First-party proxy for PostHog so ad blockers don't drop events
   async rewrites() {

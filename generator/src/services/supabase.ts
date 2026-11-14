@@ -8,6 +8,7 @@ export const supabase = createClient(
 
 export interface RecentPost {
   title: string;
+  published_at: string | null;
   slug: string;
   category_slug: string;
   author_name: string;
@@ -45,7 +46,7 @@ export interface BlogPostInsert {
 export async function getRecentPosts(limit = 60): Promise<RecentPost[]> {
   const { data, error } = await supabase
     .from("blog_posts")
-    .select("title, slug, author_name, blog_categories(slug)")
+    .select("title, slug, author_name, published_at, blog_categories(slug)")
     .order("published_at", { ascending: false })
     .limit(limit);
 
@@ -53,6 +54,7 @@ export async function getRecentPosts(limit = 60): Promise<RecentPost[]> {
 
   return (data ?? []).map((post: any) => ({
     title: post.title,
+    published_at: post.published_at ?? null,
     slug: post.slug,
     author_name: post.author_name ?? "",
     category_slug: post.blog_categories?.slug ?? "",

@@ -40,6 +40,8 @@ export interface BlogConfig {
   schedule: {
     timezone: string;
     devsHours: number[];
+    /* Cadence guard: skip the run if the last post is newer than this */
+    minDaysBetweenPosts: number;
   };
   cta: {
     mappings: CTAMapping[];
@@ -75,10 +77,11 @@ export const blogConfig: BlogConfig = {
     { slug: "carreira-dev", name: "Carreira Dev", audience: "devs" },
   ],
 
-  // 4 runs/day (see launchd plist): 9h e 15h = clientes, 11h e 17h = devs
+  // 3 runs/week (see launchd plist): ter e qui 9h = clientes, sáb 11h = devs
   schedule: {
     timezone: "America/Sao_Paulo",
-    devsHours: [11, 17],
+    devsHours: [11],
+    minDaysBetweenPosts: 1.5,
   },
 
   cta: {
