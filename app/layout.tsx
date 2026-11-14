@@ -90,6 +90,10 @@ export const metadata: Metadata = {
     address: true,
   },
   category: "technology",
+  // Bing Webmaster Tools ownership check: must stay in place to remain verified
+  verification: {
+    other: { "msvalidate.01": "A324B9C85629936F712892C8B29A942A" },
+  },
   icons: {
     icon: [{ url: "/favicon.ico", sizes: "any" }, { url: "/icon.svg" }],
     apple: "/apple-touch-icon.png",
