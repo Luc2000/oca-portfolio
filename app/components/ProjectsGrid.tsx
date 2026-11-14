@@ -43,7 +43,7 @@ const ProjectsGrid = () => {
       </div>
 
       <motion.div layout className="grid grid-cols-1 gap-8 md:grid-cols-2">
-        <AnimatePresence mode="popLayout">
+        <AnimatePresence mode="popLayout" initial={false}>
           {filtered.map((project) => (
             <motion.div
               key={project.slug}
