@@ -27,8 +27,8 @@ const CompanyFaq = () => {
           <FaqList items={companyFaq} />
         </Reveal>
         <Reveal className="mt-10">
-          <Link href="/servicos" className="btn-secondary">
-            Ver serviços e guias de preço
+          <Link href="/precos" className="btn-secondary">
+            Ver guias de preço
             <FiArrowRight />
           </Link>
         </Reveal>

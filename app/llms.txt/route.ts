@@ -27,6 +27,7 @@ export function GET() {
     "",
     "## Guias de preço e decisão",
     "",
+    `- [Quanto custa desenvolver software](${site.url}/precos): o que move o preço em cada tipo de projeto.`,
     ...services.flatMap((service) =>
       service.guides.map(
         (guide) => `- [${guide.title}](${site.url}/blog/${guide.slug})`,
