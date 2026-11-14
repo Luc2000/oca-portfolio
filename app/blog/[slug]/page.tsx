@@ -63,6 +63,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const relatedPosts = await getRelatedPosts(post);
   const readingTime = readingTimeMinutes(post.content);
+  const signedByFounder = post.author_name === site.founder;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -77,8 +78,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         dateModified: post.updated_at,
         inLanguage: "pt-BR",
         author: {
-          "@type": "Person",
-          name: post.author_name,
+          "@id": signedByFounder
+            ? `${site.url}/#founder`
+            : `${site.url}/#organization`,
         },
         publisher: { "@id": `${site.url}/#organization` },
         mainEntityOfPage: `${site.url}/blog/${post.slug}`,
@@ -141,7 +143,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {post.title}
           </h1>
           <p className="annotation mt-6 normal-case tracking-normal">
-            {post.author_name} ·{" "}
+            {signedByFounder ? (
+              <Link
+                href="/sobre"
+                className="transition-colors hover:text-areia"
+              >
+                {post.author_name}
+              </Link>
+            ) : (
+              post.author_name
+            )}{" "}
+            ·{" "}
             <time dateTime={post.published_at}>
               {formatPostDate(post.published_at)}
             </time>{" "}
