@@ -1,23 +1,15 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Reveal from "../components/Reveal";
 import SectionHeader from "../components/SectionHeader";
 import ContactCTA from "../components/ContactCTA";
+import { pageMetadata } from "../lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Sobre Nós | Conheça a OCA Software House",
   description:
     "Somos uma software house especializada em aplicativos, sistemas web e MVPs. Conheça nossa história, nossa equipe e como transformamos ideias em negócios digitais.",
-  alternates: {
-    canonical: "/sobre",
-  },
-  openGraph: {
-    title: "Sobre Nós | OCA Software House",
-    description:
-      "Conheça nossa história, nossa equipe e como transformamos ideias em negócios digitais.",
-    url: "/sobre",
-  },
-};
+  path: "/sobre",
+});
 
 const teamMembers = [
   {

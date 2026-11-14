@@ -1,24 +1,16 @@
-import type { Metadata } from "next";
 import { FiLock } from "react-icons/fi";
 import Reveal from "../components/Reveal";
 import ProjectsGrid from "../components/ProjectsGrid";
 import ContactCTA from "../components/ContactCTA";
 import { ndaProjects } from "../data/projects";
+import { pageMetadata } from "../lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Projetos | Portfólio de Desenvolvimento de Software",
   description:
     "Conheça os produtos que a OCA construiu e mantém em produção: aplicativos mobile, sistemas web e plataformas de dados com React Native, Next.js e mais.",
-  alternates: {
-    canonical: "/projetos",
-  },
-  openGraph: {
-    title: "Projetos | OCA Software House",
-    description:
-      "Conheça os produtos que a OCA construiu e mantém em produção: aplicativos mobile, sistemas web e plataformas de dados.",
-    url: "/projetos",
-  },
-};
+  path: "/projetos",
+});
 
 export default function ProjectsPage() {
   return (

@@ -1,27 +1,19 @@
-import type { Metadata } from "next";
 import { FiCheck } from "react-icons/fi";
 import DevsSection from "../components/DevsSection";
 import Reveal from "../components/Reveal";
 import SectionHeader from "../components/SectionHeader";
 import TrackedLink from "../components/TrackedLink";
 import { site, whatsappUrl } from "../data/site";
+import { pageMetadata } from "../lib/seo";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Parceiros | Trabalhe Conosco ou Faça Parceria com a OCA",
   description:
     "A demanda que chega pela OCA é maior do que conseguimos atender. Devs entram para a rede de parceiros e recebem projetos; empresas fazem parcerias e patrocínios.",
-  alternates: {
-    canonical: "/parceiros",
-  },
-  openGraph: {
-    title: "Parceiros | OCA Software House",
-    description:
-      "Devs recebem projetos repassados com escopo fechado; empresas fazem parcerias e patrocínios com quem é referência no Google e nas IAs.",
-    url: "/parceiros",
-  },
-};
+  path: "/parceiros",
+});
 
 const breadcrumbJsonLd = {
   "@context": "https://schema.org",

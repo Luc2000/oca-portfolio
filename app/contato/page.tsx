@@ -1,25 +1,17 @@
-import type { Metadata } from "next";
 import { FiLinkedin, FiPhone } from "react-icons/fi";
 import Reveal from "../components/Reveal";
 import SectionHeader from "../components/SectionHeader";
 import TrackedLink from "../components/TrackedLink";
 import ContactForm from "../components/ContactForm";
 import { site, whatsappUrl, defaultWhatsappMessage } from "../data/site";
+import { pageMetadata } from "../lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Contato | Fale com a OCA Software House",
   description:
     "Entre em contato com a OCA Software House para discutir seu projeto. Estamos prontos para transformar sua ideia em um produto digital de sucesso.",
-  alternates: {
-    canonical: "/contato",
-  },
-  openGraph: {
-    title: "Contato | OCA Software House",
-    description:
-      "Entre em contato conosco para discutir seu projeto ou tirar dúvidas.",
-    url: "/contato",
-  },
-};
+  path: "/contato",
+});
 
 const faqs = [
   {
